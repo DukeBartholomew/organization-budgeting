@@ -10,13 +10,13 @@ app.use(cors()) // This has to be before any routes
 app.use(express.json())
 
 // Connect to mysql
-// const mysql = require('mysql')
-// const connection = mysql.createConnection({
-//   host: 'localhost',
-//   user: 'root',
-//   password: 'BeOrganized',
-//   database: 'DBUI'
-// })
+const mysql = require('mysql')
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'BeOrganized',
+  database: 'DBUI'
+})
 
 connection.connect()
 
