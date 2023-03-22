@@ -7,3 +7,10 @@ CREATE TABLE IF NOT EXISTS users(
     age INT,
     admin BOOLEAN NOT NULL DEFAULT FALSE
 );
+
+CREATE TABLE IF NOT EXISTS organizations (
+	orgId serial PRIMARY KEY,
+	orgName VARCHAR ( 128 ) UNIQUE NOT NULL,
+	totalBudget REAL NOT NULL,
+	budgetDate VARCHAR ( 128 ) UNIQUE NOT NULL
+);
