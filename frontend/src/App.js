@@ -14,9 +14,9 @@ function App() {
   }
 
   const user = {
-    "first": "Hayden",
-    "last": "Center",
-    "age": 22,
+    "first": "Duke",
+    "last": "Bartholomew",
+    "age": 21,
     "admin": true
   }
 
@@ -56,7 +56,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Hello World!</h1>
+      <h1>Budget Mania</h1>
       <button onClick={checkAPI}>Check API</button>
       <button onClick={sendJSON}>Send JSON</button>
       <button onClick={sendUser}>Send User to DB</button>
