@@ -14,3 +14,4 @@ Tips:
   - "git pull" won't ever hurt to do, it just won't do anything if there's nothing to pull
   - Use "git switch [Whatver the branch name is]" to switch branches. (Don't use quotes or square
     brackets in the actually command, that was just so you could tell what's what).
+<img width="707" alt="Screenshot 2023-03-22 at 6 15 34 PM" src="https://user-images.githubusercontent.com/92462972/227059612-0d23a0e3-b973-458f-b081-977b11da5500.png">
