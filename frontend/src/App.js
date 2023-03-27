@@ -1,5 +1,7 @@
 import './App.css';
 import axios from 'axios';
+import { MantineProvider } from '@mantine/core';
+import { useClipboard } from '@mantine/hooks';
 
 function App() {
 
@@ -55,15 +57,41 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h1>Budget Mania</h1>
-      <button onClick={checkAPI}>Check API</button>
-      <button onClick={sendJSON}>Send JSON</button>
-      <button onClick={sendUser}>Send User to DB</button>
-      <button onClick={getUsers}>Get Users from DB</button>
-      <button onClick={clearUsers}>Clear Users in DB</button>
-    </div>
+    
+    
+      <div className="App">
+        <Login/>
+        <h1 class="header">Budget Mania</h1>
+        <button onClick={checkAPI}>Check API</button>
+        <button onClick={sendJSON}>Send JSON</button>
+        <button onClick={sendUser}>Send User to DB</button>
+        <button onClick={getUsers}>Get Users from DB</button>
+        <button onClick={clearUsers}>Clear Users in DB</button>
+
+        
+      </div>
+      
+  );
+
+
+}
+
+export const Login = () => {
+  return(
+    <>
+      <div class="login-info">
+      <h2>Username</h2>
+      <textarea class="username"></textarea>
+      <h2>Password</h2>
+      <textarea class="password"></textarea>
+      <br></br>
+      <button type="button" class="login-button">Login</button>
+      </div>
+      <div class="clear"></div>
+    </>
   );
 }
+
+
 
 export default App;

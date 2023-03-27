@@ -1,3 +1,30 @@
 .App {
   text-align: center;
 }
+
+.header {
+  background-color: rgb(78, 26, 26);
+  color: white;
+  font-weight: bold;
+  padding: 6px;
+  margin-top: 0;
+  text-align: left;
+  padding-left: 20px;
+  font-size: 50px;
+}
+
+.login-info {
+  border-width: 5px;
+  display: inline-block;
+  float: left;
+  margin-left: 30px;
+  margin-top: 80px;
+}
+
+.login-button {
+  float: right;
+}
+
+.clear {
+  float: none;
+}
