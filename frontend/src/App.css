@@ -1,3 +1,48 @@
 .App {
   text-align: center;
 }
+
+*{
+  font-family: 'Raleway', sans-serif;
+}
+
+.header {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  padding: 6px;
+  margin-top: 0;
+  text-align: left;
+  padding-left: 20px;
+  font-size: 50px;
+}
+
+/* *:not(.header) {
+  background-color: rgb(206, 206, 232);
+} */
+
+
+h2 {
+  text-align: left;
+  font-size: 15px;
+}
+
+body {
+  background-image: url("./images/landingPage.png");
+}
+
+.login-info {
+  border-width: 5px;
+  display: inline-block;
+  float: right;
+  margin-right: 30px;
+  
+}
+
+.login-button {
+  float: right;
+}
+
+.clear {
+  float: none;
+}

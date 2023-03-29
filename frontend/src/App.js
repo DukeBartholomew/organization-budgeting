@@ -1,5 +1,9 @@
 import './App.css';
 import axios from 'axios';
+import { MantineProvider } from '@mantine/core';
+import { Login } from './components/Login';
+import { Font } from './components/Font';
+
 
 function App() {
 
@@ -14,9 +18,9 @@ function App() {
   }
 
   const user = {
-    "first": "Hayden",
-    "last": "Center",
-    "age": 22,
+    "first": "Duke",
+    "last": "Bartholomew",
+    "age": 21,
     "admin": true
   }
 
@@ -55,15 +59,32 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <h1>Hello World!</h1>
-      <button onClick={checkAPI}>Check API</button>
-      <button onClick={sendJSON}>Send JSON</button>
-      <button onClick={sendUser}>Send User to DB</button>
-      <button onClick={getUsers}>Get Users from DB</button>
-      <button onClick={clearUsers}>Clear Users in DB</button>
-    </div>
+    
+    
+      <div className="App">
+        <Font/>
+        
+        <h1 class="header">Budget Mania</h1>
+        <body>
+
+        <Login/>
+        {/* <button onClick={checkAPI}>Check API</button>
+        <button onClick={sendJSON}>Send JSON</button>
+        <button onClick={sendUser}>Send User to DB</button>
+        <button onClick={getUsers}>Get Users from DB</button>
+        <button onClick={clearUsers}>Clear Users in DB</button> */}
+
+        
+        </body>
+      </div>
+      
   );
+
+
 }
+
+
+
+
 
 export default App;
