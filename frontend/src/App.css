@@ -2,8 +2,12 @@
   text-align: center;
 }
 
+*{
+  font-family: 'Raleway', sans-serif;
+}
+
 .header {
-  background-color: rgb(78, 26, 26);
+  background-color: black;
   color: white;
   font-weight: bold;
   padding: 6px;
@@ -13,12 +17,26 @@
   font-size: 50px;
 }
 
+/* *:not(.header) {
+  background-color: rgb(206, 206, 232);
+} */
+
+
+h2 {
+  text-align: left;
+  font-size: 15px;
+}
+
+body {
+  background-image: url("./images/landingPage.png");
+}
+
 .login-info {
   border-width: 5px;
   display: inline-block;
-  float: left;
-  margin-left: 30px;
-  margin-top: 80px;
+  float: right;
+  margin-right: 30px;
+  
 }
 
 .login-button {
