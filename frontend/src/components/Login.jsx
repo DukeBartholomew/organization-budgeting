@@ -5,9 +5,10 @@ export const Login = () => {
       <>
         <div class="login-info">
         <h2>Username</h2>
-        <textarea class="username"></textarea>
+        <input type="text" class="username"></input>
         <h2>Password</h2>
-        <textarea class="password"></textarea>
+        <input type="text" class="password"></input>
+        <br></br>
         <br></br>
         <button type="button" class="login-button">Login</button>
         </div>
