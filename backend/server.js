@@ -29,12 +29,12 @@ app.put('/parse', (req, res) => {
     console.log(req.body)
     
     try {
-        const { first, last, age, admin } = req.body
+        const { id, first, last, username, age, admin } = req.body
         const name = `${first} ${last}`
-        const isAdmin = admin ? "is an admin" : "is not an admin"
+        const isAdmin = admin ? "is an admin." : "is not an admin"
 
         res.status(200)
-        res.send(`${name} is ${age} years old and ${isAdmin}`)
+        res.send(`${name} is ${age} years old and ${isAdmin} His user ID is ${id} and his username is ${username}`)
     } catch (err) {
         console.log(err)
     }
@@ -51,8 +51,8 @@ app.get('/db', (req, res) => {
 })
 
 app.post('/user', (req, res) => {
-    const { first, last, age, admin } = req.body
-    const query = `INSERT INTO users (first_name, last_name, age, admin) VALUES ('${first}', '${last}', ${age}, ${admin})`
+    const { id, first, last, username, password, age, admin } = req.body
+    const query = `INSERT INTO users (userId, firstName, lastName, userName, userPassword, age, admin) VALUES (${id}, '${first}', '${last}', '${username}', '${password}', ${age}, ${admin})`
     connection.query(query, (err, rows, fields) => {
         if (err) throw err
 

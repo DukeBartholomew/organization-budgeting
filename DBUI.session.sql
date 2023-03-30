@@ -1,9 +1,12 @@
 CREATE DATABASE IF NOT EXISTS DBUI;
 USE DBUI;
+drop table organizations;
 CREATE TABLE IF NOT EXISTS users(
-    user_id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(255) NOT NULL,
-    last_name VARCHAR(255) NOT NULL,
+    userId INT AUTO_INCREMENT PRIMARY KEY,
+    firstName VARCHAR(255) NOT NULL,
+    lastName VARCHAR(255) NOT NULL,
+    userName VARCHAR(255) NOT NULL,
+    userPassword VARCHAR(255) NOT NULL,
     age INT,
     admin BOOLEAN NOT NULL DEFAULT FALSE
 );
@@ -12,5 +15,5 @@ CREATE TABLE IF NOT EXISTS organizations (
 	orgId serial PRIMARY KEY,
 	orgName VARCHAR ( 128 ) UNIQUE NOT NULL,
 	totalBudget REAL NOT NULL,
-	budgetDate VARCHAR ( 128 ) UNIQUE NOT NULL
+	budgetId INT
 );

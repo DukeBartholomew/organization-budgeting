@@ -18,10 +18,13 @@ function App() {
   }
 
   const user = {
+    "id": 1,
     "first": "Duke",
     "last": "Bartholomew",
+    "username": "dukeBartholomew",
+    "password": "123",
     "age": 21,
-    "admin": true
+    "admin" : true
   }
 
   const sendJSON = () => {
