@@ -18,13 +18,48 @@ const connection = mysql.createConnection({
   database: 'DBUI'
 })
 
-connection.connect()
+connection.connect((err) => {
+    if (err) throw err;
+    console.log('Connected to database!');
+  });
 
 // API routes
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
+  // Handle login form submission
+  app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+  
+    isValidCredentials(username, password, (isValid) => {
+      if (isValid) {
+        // Redirect to the home page if the credentials are valid
+        res.status(200).send('Login successful');
+      } else {
+        // Invalid credentials
+        res.status(401).send('Invalid credentials');
+      }
+    });
+  });
+function isValidCredentials(username, password, callback) {
+    const query = `SELECT * FROM users WHERE userName = "${username}" AND userPassword = "${password}"`;
+    
+    connection.query(query, (err, rows, fields) => {
+      if (err) {
+        console.error(err);
+        callback(false);
+        return;
+      }
+  
+      // If a user with the given username and password was found, return true
+      if (rows.length == 1) {
+        callback(true);
+      } else {
+        callback(false);
+      }
+    });
+  }
 app.put('/parse', (req, res) => {
     console.log(req.body)
     
