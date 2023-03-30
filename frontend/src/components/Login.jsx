@@ -17,7 +17,7 @@ export const Login = () => {
   const [message, setMessage] = useState('');
 
   const handleLogin = () => {
-    axios.post(url + '/login', user)
+    axios.post(url + '/login', { username, password })
       .then((res) => {
         alert(res.data)
       })
