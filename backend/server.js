@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
         res.status(200).send('Login successful');
       } else {
         // Invalid credentials
-        res.status(401).send('Invalid credentials');
+        res.status(200).send('Invalid credentials');
       }
     });
   });

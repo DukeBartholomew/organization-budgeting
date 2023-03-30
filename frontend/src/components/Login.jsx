@@ -22,7 +22,7 @@ export const Login = () => {
         alert(res.data)
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err.res.data)
       });
   };
 
