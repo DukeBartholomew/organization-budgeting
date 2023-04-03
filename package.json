@@ -3,5 +3,10 @@
     "@emotion/react": "^11.10.6",
     "@mantine/core": "^6.0.4",
     "@mantine/hooks": "^6.0.4"
+  },
+  
+  "scripts": {
+    "frontend": "cd frontend && npm start",
+    "backend": "cd backend && npm start"
   }
 }
