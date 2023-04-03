@@ -8,6 +8,7 @@ const usersRouter = express.Router();
 
 usersRouter.post("/", usersController.createUserHandler);
 usersRouter.get("/", usersController.getAllUsersHandler);
+usersRouter.get("/:userId", usersController.getUserByIdHandler);
 usersRouter.delete("/clear", usersController.deleteAllUsersHandler);
 
 module.exports = usersRouter;

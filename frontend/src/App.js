@@ -2,6 +2,7 @@ import "./App.css";
 import axios from "axios";
 import { MantineProvider } from "@mantine/core";
 import { useClipboard } from "@mantine/hooks";
+import { useState } from "react";
 
 function App() {
   const url = "http://localhost:8000";
@@ -64,6 +65,18 @@ function App() {
       });
   };
 
+  const getUserById = (id) => {
+    console.log("id " + id);
+    axios
+      .get(url + "/users" + id)
+      .then((res) => {
+        alert(JSON.stringify(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const clearUsers = () => {
     axios
       .delete(url + "/users/clear")
@@ -75,6 +88,8 @@ function App() {
       });
   };
 
+  const [userId, setUserId] = useState(0);
+
   return (
     <div className="App">
       <Login />
@@ -84,6 +99,19 @@ function App() {
       <button onClick={sendUser}>Send User to DB</button>
       <button onClick={getUsers}>Get Users from DB</button>
       <button onClick={clearUsers}>Clear Users in DB</button>
+      <button
+        onClick={() => {
+          getUserById(userId);
+        }}
+      >
+        Get users by id
+      </button>
+      <input
+        value={userId}
+        onChange={(event) => {
+          setUserId(event.target.value);
+        }}
+      ></input>
 
       <br />
     </div>

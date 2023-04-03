@@ -1,3 +1,4 @@
+//connects to the database
 const mysql = require("mysql");
 const connection = mysql.createConnection({
   host: "localhost",
@@ -6,43 +7,58 @@ const connection = mysql.createConnection({
   database: "DBUI",
 });
 
-connection.connect();
+connection.connect((err) => {
+  if (err) throw err;
+  console.log("Connected to DB in /services/users.service/");
+});
 
-async function createUser(req, res) {
-  const { first, last, age, admin } = req.body;
-  const query = `INSERT INTO users (firstName, lastName, age, admin) VALUES ('${first}', '${last}', ${age}, ${admin})`;
-  connection.query(query, (err, rows, fields) => {
-    if (err) throw err;
-
-    console.log(rows);
-    res.status(200);
-    res.send("Successfully added user!");
+async function createUser(info) {
+  return await new Promise((resolve, reject) => {
+    const { first, last, age, admin } = info;
+    const query = `INSERT INTO users (firstName, lastName, age, admin) VALUES ('${first}', '${last}', ${age}, ${admin})`;
+    connection.query(query, (err, result, fields) => {
+      if (err) throw err;
+      resolve({
+        id: result.insertId,
+        first: info.first,
+        last: info.last,
+        age: info.age,
+        admin: info.admin,
+      });
+    });
   });
 }
 
-async function getAllUsers(req, res) {
-  const query = `SELECT * FROM users`;
-  connection.query(query, (err, rows, fields) => {
-    if (err) throw err;
-
-    console.log(rows);
-    res.status(200);
-    res.send(rows);
+async function getAllUsers() {
+  return await new Promise((resolve, reject) => {
+    const query = `SELECT * FROM users`;
+    connection.query(query, (err, result, fields) => {
+      if (err) throw err;
+      console.log(result);
+      resolve(result);
+    });
   });
 }
 
-async function deleteAllUsers(req, res) {
-  const query = `DELETE FROM users`;
-  connection.query(query, (err, rows, fields) => {
-    if (err) {
-      console.log("HERE");
-      throw err;
-    }
-    console.log(rows);
-
-    res.status(200);
-    res.send("Successfully deleted all users!");
+async function getUserById(id) {
+  return new Promise((resolve, reject) => {
+    const query = `SELECT * FROM users WHERE userId=${id}`;
+    connection.query(query, (err, result, fields) => {
+      if (err) throw err;
+      console.log(result);
+      resolve(result);
+    });
   });
 }
 
-module.exports = { createUser, getAllUsers, deleteAllUsers };
+async function deleteAllUsers() {
+  return await new Promise((resolve, reject) => {
+    const query = `DELETE FROM users`;
+    connection.query(query, (err, result, fields) => {
+      if (err) throw err;
+      resolve(result.affectedRows);
+    });
+  });
+}
+
+module.exports = { createUser, getAllUsers, getUserById, deleteAllUsers };

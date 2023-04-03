@@ -7,6 +7,10 @@
   
   "scripts": {
     "frontend": "cd frontend && npm start",
-    "backend": "cd backend && npm start"
+    "f" : "cd frontend && npm start",
+    "backend": "cd backend && npm run dev",
+    "b": "cd backend && npm run dev",
+    "update": "(cd backend && npm i) && cd .. && (cd frontend && npm i)",
+    "u": "(cd backend && npm i) && cd .. && (cd frontend && npm i)"
   }
 }
