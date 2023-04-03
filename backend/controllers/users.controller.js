@@ -50,9 +50,9 @@ async function getUserByIdHandler(req, res) {
 
 async function deleteAllUsersHandler(req, res) {
   try {
-    const deletedUsers = await services.deleteAllUsers();
-    console.log(result);
-    res.status(200).json(result);
+    const rowsDeleted = await services.deleteAllUsers();
+    console.log(rowsDeleted);
+    res.status(200).json(rowsDeleted);
   } catch (error) {
     console.error(error);
     res.status(400).json({

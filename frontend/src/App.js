@@ -66,9 +66,8 @@ function App() {
   };
 
   const getUserById = (id) => {
-    console.log("id " + id);
     axios
-      .get(url + "/users" + id)
+      .get(url + "/users/" + id)
       .then((res) => {
         alert(JSON.stringify(res.data));
       })
