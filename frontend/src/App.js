@@ -1,8 +1,10 @@
-import "./App.css";
-import axios from "axios";
+import './App.css';
+import axios from 'axios';
 import { MantineProvider } from "@mantine/core";
 import { useClipboard } from "@mantine/hooks";
-import { useState } from "react";
+import { useState } from 'react';
+import { Login } from './components/Login';
+import { Font } from './components/Font';
 
 function App() {
   const url = "http://localhost:8000";
@@ -91,8 +93,12 @@ function App() {
 
   return (
     <div className="App">
+      <Font/>
+        
+      <h1 class="header">Budget Mania</h1>
+      <body>
       <Login />
-      <h1 className="header">Budget Mania</h1>
+
       <button onClick={checkAPI}>Check API</button>
       <button onClick={sendJSON}>Send JSON</button>
       <button onClick={sendUser}>Send User to DB</button>
@@ -113,26 +119,8 @@ function App() {
       ></input>
 
       <br />
+      </body>
     </div>
   );
 }
-
-export const Login = () => {
-  return (
-    <>
-      <div class="login-info">
-        <h2>Username</h2>
-        <textarea class="username"></textarea>
-        <h2>Password</h2>
-        <textarea class="password"></textarea>
-        <br></br>
-        <button type="button" class="login-button">
-          Login
-        </button>
-      </div>
-      <div class="clear"></div>
-    </>
-  );
-};
-
 export default App;
