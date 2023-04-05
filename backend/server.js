@@ -18,23 +18,58 @@ const connection = mysql.createConnection({
   database: 'DBUI'
 })
 
-connection.connect()
+connection.connect((err) => {
+    if (err) throw err;
+    console.log('Connected to database!');
+  });
 
 // API routes
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
+  // Handle login form submission
+  app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+  
+    isValidCredentials(username, password, (isValid) => {
+      if (isValid) {
+        // Redirect to the home page if the credentials are valid
+        res.status(200).send('Login successful');
+      } else {
+        // Invalid credentials
+        res.status(200).send('Invalid credentials');
+      }
+    });
+  });
+function isValidCredentials(username, password, callback) {
+    const query = `SELECT * FROM users WHERE userName = "${username}" AND userPassword = "${password}"`;
+    
+    connection.query(query, (err, rows, fields) => {
+      if (err) {
+        console.error(err);
+        callback(false);
+        return;
+      }
+  
+      // If a user with the given username and password was found, return true
+      if (rows.length == 1) {
+        callback(true);
+      } else {
+        callback(false);
+      }
+    });
+  }
 app.put('/parse', (req, res) => {
     console.log(req.body)
     
     try {
-        const { first, last, age, admin } = req.body
+        const { id, first, last, username, age, admin } = req.body
         const name = `${first} ${last}`
-        const isAdmin = admin ? "is an admin" : "is not an admin"
+        const isAdmin = admin ? "is an admin." : "is not an admin"
 
         res.status(200)
-        res.send(`${name} is ${age} years old and ${isAdmin}`)
+        res.send(`${name} is ${age} years old and ${isAdmin} His user ID is ${id} and his username is ${username}`)
     } catch (err) {
         console.log(err)
     }
@@ -51,8 +86,8 @@ app.get('/db', (req, res) => {
 })
 
 app.post('/user', (req, res) => {
-    const { first, last, age, admin } = req.body
-    const query = `INSERT INTO users (first_name, last_name, age, admin) VALUES ('${first}', '${last}', ${age}, ${admin})`
+    const { id, first, last, username, password, age, admin } = req.body
+    const query = `INSERT INTO users (userId, firstName, lastName, userName, userPassword, age, admin) VALUES (${id}, '${first}', '${last}', '${username}', '${password}', ${age}, ${admin})`
     connection.query(query, (err, rows, fields) => {
         if (err) throw err
 

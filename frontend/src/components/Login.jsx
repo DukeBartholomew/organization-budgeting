@@ -1,17 +1,44 @@
-
+import { useState } from 'react';
+import axios from 'axios';
+const user = {
+  "id": 1,
+  "first": "Duke",
+  "last": "Bartholomew",
+  "username": "dukeBartholomew",
+  "password": "123",
+  "age": 21,
+  "admin" : true
+}
+const url = 'http://localhost:8000'
 
 export const Login = () => {
-    return(
-      <>
-        <div class="login-info">
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleLogin = () => {
+    axios.post(url + '/login', { username, password })
+      .then((res) => {
+        alert(res.data)
+      })
+      .catch((err) => {
+        console.log(err.res.data)
+      });
+  };
+
+  return (
+    <>
+      <div className="login-info">
         <h2>Username</h2>
-        <textarea class="username"></textarea>
+        <input type="text" className="username" value={username} onChange={(e) => setUsername(e.target.value)} />
         <h2>Password</h2>
-        <textarea class="password"></textarea>
-        <br></br>
-        <button type="button" class="login-button">Login</button>
-        </div>
-        <div class="clear"></div>
-      </>
-    );
-  }
+        <input type="password" className="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <br />
+        <br />
+        <button type="button" className="login-button" onClick={handleLogin}>Login</button>
+      </div>
+      <div className="clear"></div>
+      {message && <p>{message}</p>}
+    </>
+  );
+};
