@@ -1,89 +1,73 @@
-//connects to the database
-const mysql = require("mysql");
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "BeOrganized",
-  database: "DBUI",
-});
+import { connection } from "../mysql/connect.js";
 
-connection.connect((err) => {
-  if (err) throw err;
-  console.log("Connected to DB in /services/users.service/");
-});
-
-async function createUser(info) {
-  return await new Promise((resolve, reject) => {
-    const { id, first, last, username, password, age, admin } = info;
-    const query = `INSERT INTO users (userId, firstName, lastName, userName, userPassword, age, admin) VALUES (${id}, '${first}', '${last}', '${username}', '${password}', ${age}, ${admin})`
-    connection.query(query, (err, result, fields) => {
-      if (err) throw err;
-      resolve({
-        id: result.insertId,
-        first: info.first,
-        last: info.last,
-        username: info.username,
-        password: info.password,
-        age: info.age,
-        admin: info.admin,
-      });
-    });
-  });
+async function createUser(user) {
+  const { username, password, firstName, lastName, age, admin } = user;
+  const query = `
+  INSERT INTO users 
+  (username, password, firstName, lastName, age, admin) 
+  VALUES (?, ?, ?, ?, ?, ?)`;
+  try {
+    const results = await connection.query(query, [
+      username,
+      password,
+      firstName,
+      lastName,
+      age,
+      admin,
+    ]);
+    return {
+      userId: results[0].insertId,
+      username,
+      password,
+      firstName,
+      lastName,
+      age,
+      admin,
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 async function getAllUsers() {
-  return await new Promise((resolve, reject) => {
-    const query = `SELECT * FROM users`;
-    connection.query(query, (err, result, fields) => {
-      if (err) throw err;
-      console.log(result);
-      resolve(result);
-    });
-  });
+  const query = `
+  SELECT * 
+  FROM users`;
+  const [rows] = await connection.query(query);
+  console.log(rows);
+  return rows;
+}
+
+async function getUserByUsername(username) {
+  const query = `
+    SELECT * 
+    FROM users
+    WHERE username = ?`;
+  const [rows] = await connection.query(query, [username]);
+  return rows[0];
 }
 
 async function getUserById(id) {
-  return new Promise((resolve, reject) => {
-    const query = `SELECT * FROM users WHERE userId=${id}`;
-    connection.query(query, (err, result, fields) => {
-      if (err) throw err;
-      console.log(result);
-      resolve(result);
-    });
-  });
+  const query = `
+    SELECT * 
+    FROM users 
+    WHERE userId = ?`;
+  const [rows] = await connection.query(query, [id]);
+  console.log(rows);
+  return rows[0];
 }
 
 async function deleteAllUsers() {
-  return await new Promise((resolve, reject) => {
-    const query = `DELETE FROM users`;
-    connection.query(query, (err, result, fields) => {
-      if (err) throw err;
-      resolve(result.affectedRows);
-    });
-  });
+  const query = `DELETE FROM users`;
+  const results = await connection.query(query);
+  console.log(results[0].affectedRows);
+  return results[0].affectedRows;
 }
 
-async function isValidCredentials(username, password, callback) {
-  return await new Promise((resolve, reject) => {
-    const query = `SELECT * FROM users WHERE userName = "${username}" AND userPassword = "${password}"`;
-    connection.query(query, [username, password], (err, result, fields) => {
-      if (err) {
-        console.error(err);
-        reject(err);
-      } else {
-        console.log(result);
-        if (result.length == 1) {
-          console.log("Username:", username);
-          console.log("Password:", password);
-          resolve(true);
-        } else {
-          console.log("Username:", username);
-          console.log("Password:", password);
-          resolve(false);
-        }
-      }
-    });
-  });
-}
-
-module.exports = { createUser, getAllUsers, getUserById, deleteAllUsers, isValidCredentials };
+export {
+  createUser,
+  getAllUsers,
+  getUserByUsername,
+  getUserById,
+  deleteAllUsers,
+};
