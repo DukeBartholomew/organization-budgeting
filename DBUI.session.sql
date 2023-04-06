@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS budgets (
     dateCreated DATE
 );
 
-CREATE TABLE IF NOT EXISTS organization_members (
+CREATE TABLE IF NOT EXISTS organizationMembers (
     userId INT,
     orgId INT,
     role VARCHAR(128),
@@ -42,5 +42,5 @@ CREATE TABLE IF NOT EXISTS contributions (
     amount REAL,
     FOREIGN KEY (userId) REFERENCES users(userId),
     FOREIGN KEY (orgId) REFERENCES organizations(orgId),
-    FOREIGN KEY (userId, orgId) REFERENCES organization_members(userId, orgId)
+    FOREIGN KEY (userId, orgId) REFERENCES organizationMembers(userId, orgId)
 );
