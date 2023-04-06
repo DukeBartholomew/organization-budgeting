@@ -1,64 +1,66 @@
-//connects to the database
-const mysql = require("mysql");
-const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "BeOrganized",
-  database: "DBUI",
-});
+import { connection } from "../mysql/connect.js";
 
-connection.connect((err) => {
-  if (err) throw err;
-  console.log("Connected to DB in /services/users.service/");
-});
-
-async function createUser(info) {
-  return await new Promise((resolve, reject) => {
-    const { first, last, age, admin } = info;
-    const query = `INSERT INTO users (firstName, lastName, age, admin) VALUES ('${first}', '${last}', ${age}, ${admin})`;
-    connection.query(query, (err, result, fields) => {
-      if (err) throw err;
-      resolve({
-        id: result.insertId,
-        first: info.first,
-        last: info.last,
-        age: info.age,
-        admin: info.admin,
-      });
-    });
-  });
+async function createUser(user) {
+  const { userName, password, firstName, lastName, age, admin } = user;
+  const query = `
+  INSERT INTO users 
+  (userName, password, firstName, lastName, age, admin) 
+  VALUES (?, ?, ?, ?, ?, ?)`;
+  try {
+    const results = await connection.query(query, [
+      userName,
+      password,
+      firstName,
+      lastName,
+      age,
+      admin,
+    ]);
+    return results[0].insertId;
+  } catch (error) {
+    console.log(error);
+    return 0;
+  }
 }
 
 async function getAllUsers() {
-  return await new Promise((resolve, reject) => {
-    const query = `SELECT * FROM users`;
-    connection.query(query, (err, result, fields) => {
-      if (err) throw err;
-      console.log(result);
-      resolve(result);
-    });
-  });
+  const query = `
+  SELECT * 
+  FROM users`;
+  const [rows] = await connection.query(query);
+  console.log(rows);
+  return rows;
+}
+
+async function getUserByUsername(username) {
+  const query = `
+    SELECT * 
+    FROM users
+    WHERE username = ?`;
+  const [rows] = await connection.query(query, [username]);
+  return rows[0];
 }
 
 async function getUserById(id) {
-  return new Promise((resolve, reject) => {
-    const query = `SELECT * FROM users WHERE userId=${id}`;
-    connection.query(query, (err, result, fields) => {
-      if (err) throw err;
-      console.log(result);
-      resolve(result);
-    });
-  });
+  const query = `
+    SELECT * 
+    FROM users 
+    WHERE userId = ?`;
+  const [rows] = await connection.query(query, [id]);
+  console.log(rows);
+  return rows[0];
 }
 
 async function deleteAllUsers() {
-  return await new Promise((resolve, reject) => {
-    const query = `DELETE FROM users`;
-    connection.query(query, (err, result, fields) => {
-      if (err) throw err;
-      resolve(result.affectedRows);
-    });
-  });
+  const query = `DELETE FROM users`;
+  const results = await connection.query(query);
+  console.log(results[0].affectedRows);
+  return results[0].affectedRows;
 }
 
-module.exports = { createUser, getAllUsers, getUserById, deleteAllUsers };
+export {
+  createUser,
+  getAllUsers,
+  getUserByUsername,
+  getUserById,
+  deleteAllUsers,
+};

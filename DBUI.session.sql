@@ -2,6 +2,8 @@ CREATE DATABASE IF NOT EXISTS DBUI;
 USE DBUI;
 CREATE TABLE IF NOT EXISTS users (
     userId INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(128) UNIQUE NOT NULL,
+    password VARCHAR(128) NOT NULL,
     firstName VARCHAR(128) NOT NULL,
     lastName VARCHAR(128) NOT NULL,
     age INT,
@@ -41,3 +43,4 @@ CREATE TABLE IF NOT EXISTS contributions (
     FOREIGN KEY (orgId) REFERENCES organizations(orgId),
     FOREIGN KEY (userId, orgId) REFERENCES organization_members(userId, orgId)
 );
+
