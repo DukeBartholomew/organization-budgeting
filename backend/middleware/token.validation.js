@@ -6,11 +6,7 @@ const validateToken = (req, res, next) => {
   try {
     const token = req.body.Headers.jwt;
     console.log(req.body.Headers);
-    console.log("token");
     const isValid = jwt.verify(token, process.env.JWT_SECRET);
-    console.log("valid");
-
-    console.log(isValid);
     console.log("valid");
     req.verified = isValid;
     return next();

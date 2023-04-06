@@ -9,7 +9,7 @@ async function createUserHandler(req, res) {
   try {
     const newUser = await createUser(req.body);
     console.log(newUser);
-    res.status(201).json(JSON.stringify(newUser));
+    res.status(201).json(newUser);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error });

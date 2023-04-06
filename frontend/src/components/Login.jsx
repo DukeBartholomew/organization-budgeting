@@ -18,7 +18,7 @@ const handleLogin = (username, password) => {
     .post(url + "/logIn", { username, password })
     .then((res) => {
       setJWT(res.data.token);
-      alert(res.data);
+      alert(res.data.username);
     })
     .catch((err) => {
       console.log(err.res.data);
@@ -29,7 +29,7 @@ const handleRegistration = (user) => {
   axios
     .post(url + "/register", user)
     .then((res) => {
-      alert(res.data);
+      alert(JSON.stringify(res.data));
     })
     .catch((err) => {
       console.log(err);
@@ -54,6 +54,7 @@ const handleProfileRequest = () => {
 
 const handleLogout = () => {
   removeJWT();
+  alert("Logged Out");
 };
 
 export const Login = () => {

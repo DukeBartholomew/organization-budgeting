@@ -28,7 +28,7 @@ function App() {
     axios
       .post(url + "/users", user)
       .then((res) => {
-        alert(res.data);
+        alert(JSON.stringify(res.data));
       })
       .catch((err) => {
         console.log(err);

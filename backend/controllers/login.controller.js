@@ -6,7 +6,7 @@ import { getUserByUsername } from "../services/users.services.js";
 async function loginHandler(req, res) {
   try {
     const { username, password } = req.body;
-    const { password: hash, userId } = await getUserByUsername(username);
+    const { userId, password: hash } = await getUserByUsername(username);
     const match = await comparePasswords(password, hash);
     if (!match) {
       return res.status(401).json(match);

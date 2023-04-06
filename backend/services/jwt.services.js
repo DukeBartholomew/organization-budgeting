@@ -3,10 +3,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const createToken = (username, userId) => {
-  const token = jwt.sign(
-    { username: username, userId: userId },
-    process.env.JWT_SECRET
-  ); //double check if that can be shortened
+  const token = jwt.sign({ username, userId }, process.env.JWT_SECRET);
   console.log(token);
   console.log("Created token");
   return token;
