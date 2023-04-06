@@ -24,6 +24,13 @@ function App() {
     budget: 1000,
   };
 
+  const budget = {
+    budgetId: 1,
+    orgId: 1,
+    dateCreated: "January 1, 1999"
+
+  }
+
   const sendUser = () => {
     axios
       .post(url + "/users", user)
@@ -68,7 +75,52 @@ function App() {
       });
   };
 
+  const sendBudget = () => {
+    axios
+      .post(url + "/budgets", budget)
+      .then((res) => {
+        alert(JSON.stringify(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getBudgets = () => {
+    axios
+      .get(url + "/budgets")
+      .then((res) => {
+        alert(JSON.stringify(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getBudgetsById = (budgetId) => {
+    axios
+      .get(url + "/budgets/" + budgetId)
+      .then((res) => {
+        alert(JSON.stringify(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const clearBudgets = () => {
+    axios
+      .delete(url + "/budgets/clearBudget")
+      .then((res) => {
+        alert(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const [userId, setUserId] = useState(0);
+  const [budgetId, setBudgetId] = useState(0);
 
   return (
     <div className="App">
@@ -94,7 +146,22 @@ function App() {
             setUserId(event.target.value);
           }}
         ></input>
-
+        <button onClick={sendBudget}>Send Budget to DB</button>
+        <button onClick={getBudgets}>Get Budgets from DB</button>
+        <button onClick={clearBudgets}>Clear Budgets in DB</button>
+        <button
+          onClick={() => {
+            getBudgetsById(budgetId);
+          }}
+        >
+          Get budgets by id
+        </button>
+        <input
+          value={budgetId}
+          onChange={(event) => {
+            setBudgetId(event.target.value);
+          }}
+        ></input>
         <br />
       </body>
     </div>
