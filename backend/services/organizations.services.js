@@ -13,6 +13,7 @@ async function createOrganization(organization) {
       ]);
       return {
         orgId: results[0].insertId,
+        budgetId: results[0].insertId,
         orgName,
         dateCreated,
       };

@@ -21,13 +21,13 @@ function App() {
 
   const organization = {
     orgId: 1,
+    budgetId: 1,
     orgName: "notGoogle",
     dateCreated: '2008-11-11'
   };
 
   const budget = {
     budgetId: 1,
-    orgId: 1,
     dateCreated: '2008-11-11'
   }
 
