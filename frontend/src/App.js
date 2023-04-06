@@ -27,8 +27,7 @@ function App() {
   const budget = {
     budgetId: 1,
     orgId: 1,
-    dateCreated: "January 1, 1999"
-
+    dateCreated: '2008-11-11'
   }
 
   const sendUser = () => {
