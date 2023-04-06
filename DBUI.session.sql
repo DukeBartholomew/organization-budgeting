@@ -11,20 +11,18 @@ CREATE TABLE IF NOT EXISTS users(
     admin BOOLEAN NOT NULL DEFAULT FALSE
 );
 
-CREATE TABLE IF NOT EXISTS budgets (
-    budgetId INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS organizations (
+    orgId INT AUTO_INCREMENT PRIMARY KEY,
+    orgName VARCHAR (128) UNIQUE NOT NULL,
     dateCreated DATE
 );
 
-CREATE TABLE IF NOT EXISTS organizations (
-    orgId INT AUTO_INCREMENT PRIMARY KEY,
-    budgetId INT,
-    orgName VARCHAR (128) UNIQUE NOT NULL,
-    dateCreated DATE,
-    FOREIGN KEY (budgetId) REFERENCES budgets(budgetId)
+CREATE TABLE IF NOT EXISTS budgets (
+    budgetId INT AUTO_INCREMENT PRIMARY KEY,
+    orgId INT,
+    FOREIGN KEY (orgId) REFERENCES organizations(orgId),
+    dateCreated DATE
 );
-
-
 
 CREATE TABLE IF NOT EXISTS organizationMembers (
     userId INT,

@@ -21,16 +21,17 @@ function App() {
 
   const organization = {
     orgId: 1,
-    budgetId: 1,
     orgName: "notGoogle",
     dateCreated: '2008-11-11'
   };
 
   const budget = {
     budgetId: 1,
-    dateCreated: '2008-11-11'
-  }
+    org: { orgId: organization.orgId },
+    dateCreated: "2023-04-06"
+  };
 
+  
   const sendUser = () => {
     axios
       .post(url + "/users", user)
@@ -142,7 +143,7 @@ function App() {
 
   const getOrgByOrgId = (orgId) => {
     axios
-      .get(url + "/orgs/" + budgetId)
+      .get(url + "/orgs/" + orgId)
       .then((res) => {
         alert(JSON.stringify(res.data));
       })
