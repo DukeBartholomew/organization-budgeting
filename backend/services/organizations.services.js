@@ -1,14 +1,13 @@
 import { connection } from "../mysql/connect.js";
 
 async function createOrganization(organization) {
-    const { orgId, orgName, dateCreated } = organization;
+    const { orgName, dateCreated } = organization;
     const query = `
     INSERT INTO organizations 
     (orgId, orgName, dateCreated) 
     VALUES (?, ?, ?)`;
     try {
       const results = await connection.query(query, [
-        orgId,
         orgName,
         dateCreated
       ]);
