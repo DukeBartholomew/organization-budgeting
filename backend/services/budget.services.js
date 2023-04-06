@@ -1,18 +1,17 @@
 import { connection } from "../mysql/connect.js";
 
 async function createBudget(budget) {
-    const { dateCreated } = budget;
+    const { budgetId, orgId, dateCreated } = budget;
     const query = `
     INSERT INTO budgets 
-    (budgetId, orgId, dateCreated) 
-    VALUES (?, ?, ?)`;
+    (dateCreated) 
+    VALUES (?)`;
     try {
       const results = await connection.query(query, [
         dateCreated
       ]);
       return {
         budgetId: results[0].insertId,
-        orgId: results[0].insertId,
         dateCreated,
       };
     } catch (error) {

@@ -4,8 +4,8 @@ async function createOrganization(organization) {
     const { orgName, dateCreated } = organization;
     const query = `
     INSERT INTO organizations 
-    (orgId, orgName, dateCreated) 
-    VALUES (?, ?, ?)`;
+    (orgName, dateCreated) 
+    VALUES (?, ?)`;
     try {
       const results = await connection.query(query, [
         orgName,
