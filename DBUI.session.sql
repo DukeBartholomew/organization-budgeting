@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS organizations (
 CREATE TABLE IF NOT EXISTS budgets (
     budgetId INT AUTO_INCREMENT PRIMARY KEY,
     orgId INT,
-
+    FOREIGN KEY (orgId) REFERENCES organizations(orgId),
     dateCreated DATE
 );
 

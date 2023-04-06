@@ -7,6 +7,7 @@ import registerRouter from "./routes/register.routes.js";
 import loginRouter from "./routes/login.routes.js";
 import profileRouter from "./routes/profile.routes.js";
 import budgetRouter from "./routes/budgets.route.js";
+import orgsRouter from "./routes/organizations.route.js";
 //imports the middlewares
 import { validateToken } from "./middleware/token.validation.js";
 
@@ -23,7 +24,8 @@ app.use("/users", userRouter);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/profile", validateToken, profileRouter);
-app.use("/budgets", budgetRouter)
+app.use("/budgets", budgetRouter);
+app.use("/orgs", orgsRouter);
 //error function
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);

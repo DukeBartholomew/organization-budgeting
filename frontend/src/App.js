@@ -20,8 +20,9 @@ function App() {
   };
 
   const organization = {
-    name: "SMU",
-    budget: 1000,
+    orgId: 1,
+    orgName: "notGoogle",
+    dateCreated: '2008-11-11'
   };
 
   const budget = {
@@ -117,10 +118,53 @@ function App() {
         console.log(err);
       });
   };
+  const sendOrg = () => {
+    axios
+      .post(url + "/orgs", organization)
+      .then((res) => {
+        alert(JSON.stringify(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getOrganizations = () => {
+    axios
+      .get(url + "/orgs")
+      .then((res) => {
+        alert(JSON.stringify(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getOrgByOrgId = (orgId) => {
+    axios
+      .get(url + "/orgs/" + orgId)
+      .then((res) => {
+        alert(JSON.stringify(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const clearOrgs = () => {
+    axios
+      .delete(url + "/orgs/clearOrg")
+      .then((res) => {
+        alert(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const [userId, setUserId] = useState(0);
   const [budgetId, setBudgetId] = useState(0);
-
+  const [orgId, setOrgId] = useState(0);
   return (
     <div className="App">
       <Font />
@@ -159,6 +203,22 @@ function App() {
           value={budgetId}
           onChange={(event) => {
             setBudgetId(event.target.value);
+          }}
+        ></input>
+        <button onClick={sendOrg}>Send Organizations to DB</button>
+        <button onClick={getOrganizations}>Get Organizations from DB</button>
+        <button onClick={clearOrgs}>Clear Organizations in DB</button>
+        <button
+          onClick={() => {
+            getOrgByOrgId(orgId);
+          }}
+        >
+          Get organizations by id
+        </button>
+        <input
+          value={orgId}
+          onChange={(event) => {
+            setOrgId(event.target.value);
           }}
         ></input>
         <br />
