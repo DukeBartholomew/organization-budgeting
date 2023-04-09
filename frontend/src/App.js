@@ -20,18 +20,13 @@ function App() {
   };
 
   const organization = {
-    orgId: 1,
     orgName: "notGoogle",
-    dateCreated: '2008-11-11'
   };
 
   const budget = {
-    budgetId: 1,
-    org: { orgId: organization.orgId },
-    dateCreated: "2023-04-06"
+    orgId: 1,
   };
 
-  
   const sendUser = () => {
     axios
       .post(url + "/users", user)
