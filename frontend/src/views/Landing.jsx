@@ -167,7 +167,7 @@ const Landing = () => {
   const [userId, setUserId] = useState(0);
   const [budgetId, setBudgetId] = useState(0);
   const [orgId, setOrgId] = useState(0);
-  return (
+  return <>
     <body>
       <Navbar />
       <Login/>
@@ -222,7 +222,7 @@ const Landing = () => {
       ></input>
       <br />
     </body>
-  );
+  </>;
 };
 
 export default Landing;
