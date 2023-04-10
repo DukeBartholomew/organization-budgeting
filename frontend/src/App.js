@@ -7,10 +7,11 @@ import Landing from "./views/Landing";
 import Home from "./views/Home";
 
 
+
 function App() {
   
   
-  return (
+  return <>
     <div className="App">
       <Font />
 
@@ -21,7 +22,7 @@ function App() {
       
     
     </div>
-  );
+    </>;
 }
 
 export default App;
