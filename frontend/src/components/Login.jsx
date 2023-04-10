@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { getJwt, setJWT, removeJWT } from "./utils/jwt";
+import { useNavigate } from "react-router-dom";
 
 const user = {
   id: 1,
@@ -11,6 +12,8 @@ const user = {
   age: 21,
   admin: true,
 };
+
+
 const url = "http://localhost:8000";
 
 const handleLogin = (username, password) => {
@@ -58,6 +61,9 @@ const handleLogout = () => {
 };
 
 export const Login = () => {
+
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -65,6 +71,8 @@ export const Login = () => {
   const [age, setAge] = useState("");
   const [admin, setAdmin] = useState("");
   const [message, setMessage] = useState("");
+
+  
 
   return (
     <>
@@ -117,7 +125,9 @@ export const Login = () => {
           type="button"
           className="login-button"
           onClick={() => {
+            navigate('/home');
             handleLogin(username, password);
+            
           }}
         >
           Login
