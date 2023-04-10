@@ -168,7 +168,8 @@ const Landing = () => {
   const [budgetId, setBudgetId] = useState(0);
   const [orgId, setOrgId] = useState(0);
   return <>
-    <body>
+    <body className="landing-body">
+      <section className="landing"></section>
       <Navbar />
       <Login/>
 
