@@ -50,3 +50,6 @@ body {
 .clear {
   float: none;
 }
+#cardFormat{
+  Width: 400px; 
+}
