@@ -91,7 +91,7 @@ export const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {/* <h2>First Name</h2>
+        <h2>First Name</h2>
         <input
           type="text"
           className="firstName"
@@ -118,7 +118,7 @@ export const Login = () => {
           className="admin"
           value={admin}
           onChange={(e) => setAdmin(e.target.value)}
-        /> */}
+        />
         <br />
         <br />
         <button
