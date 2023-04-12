@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { getJwt, setJWT, removeJWT } from "./utils/jwt";
 import { useNavigate } from "react-router-dom";
+import Navbar from "../views/Navbar";
 
 const user = {
   id: 1,
@@ -29,9 +30,7 @@ const handleLogin = (username, password) => {
 };
 
 const handleRegistration = (user) => {
-  axios
-    .post(url + "/register", user)
-    .then((res) => {
+  axios.post(url + "/register", user).then((res) => {
       alert(JSON.stringify(res.data));
     })
     .catch((err) => {
@@ -60,7 +59,7 @@ const handleLogout = () => {
   alert("Logged Out");
 };
 
-export const Login = () => {
+export const CreateAccount = () => {
 
   const navigate = useNavigate();
 
@@ -76,6 +75,7 @@ export const Login = () => {
 
   return (
     <>
+      <Navbar/>
       <div className="login-info">
         <h2>Username</h2>
         <input

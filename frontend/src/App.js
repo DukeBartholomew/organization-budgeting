@@ -3,6 +3,7 @@ import "./App.css";
 
 import { Font } from "./components/Font";
 import { Routes, Route } from "react-router-dom";
+import { CreateAccount } from "./components/CreateAccount";
 import Landing from "./views/Landing";
 import Home from "./views/Home";
 
@@ -16,7 +17,7 @@ function App() {
       <Font />
 
       <Routes>
-        <Route path='/' element={<Landing/>}/>
+        <Route path='/' element={<CreateAccount/>}/>
         <Route path='/home' element={<Home/>}/>
       </Routes>
       
