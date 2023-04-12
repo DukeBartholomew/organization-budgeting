@@ -26,8 +26,8 @@ CREATE TABLE IF NOT EXISTS budgets (
 );
 
 CREATE TABLE IF NOT EXISTS organizationMembers (
-    userId INT,
-    orgId INT,
+    userId INT NOT NULL,
+    orgId INT NOT NULL,
     role VARCHAR(128),
     dateJoined DATETIME DEFAULT NOW(),
     favorited BOOLEAN DEFAULT FALSE,

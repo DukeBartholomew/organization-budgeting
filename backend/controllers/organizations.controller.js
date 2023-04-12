@@ -27,7 +27,7 @@ async function getAllOrganizationsHandler(req, res) {
   }
 }
 
-async function getOrgByIdHandler(req, res) {
+async function getOrganizationByIdHandler(req, res) {
   try {
     const org = await getOrgById(req.params.orgId);
     console.log(org);
@@ -52,6 +52,6 @@ async function deleteAllOrganizationsHandler(req, res) {
 export {
   createOrganizationHandler,
   getAllOrganizationsHandler,
-  getOrgByIdHandler,
+  getOrganizationByIdHandler,
   deleteAllOrganizationsHandler,
 };

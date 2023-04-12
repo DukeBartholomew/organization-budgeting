@@ -27,6 +27,13 @@ function App() {
     orgId: 1,
   };
 
+  const organizationMembers = {
+    userId: 1,
+    orgId: 1,
+    role: "Member",
+    favorited: false,
+  };
+
   const sendUser = () => {
     axios
       .post(url + "/users", user)
@@ -114,9 +121,9 @@ function App() {
         console.log(err);
       });
   };
-  const sendOrg = () => {
+  const sendOrg = (organization) => {
     axios
-      .post(url + "/orgs", organization)
+      .post(url + "/organizations", organization)
       .then((res) => {
         alert(JSON.stringify(res.data));
       })
@@ -127,7 +134,7 @@ function App() {
 
   const getOrganizations = () => {
     axios
-      .get(url + "/orgs")
+      .get(url + "/organizations")
       .then((res) => {
         alert(JSON.stringify(res.data));
       })
@@ -136,9 +143,9 @@ function App() {
       });
   };
 
-  const getOrgByOrgId = (orgId) => {
+  const getOrgById = (orgId) => {
     axios
-      .get(url + "/orgs/" + orgId)
+      .get(url + "/organizations/" + orgId)
       .then((res) => {
         alert(JSON.stringify(res.data));
       })
@@ -149,9 +156,45 @@ function App() {
 
   const clearOrgs = () => {
     axios
-      .delete(url + "/orgs/clearOrg")
+      .delete(url + "/organizations/clearOrganizations")
       .then((res) => {
         alert(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const sendOrgMember = (userId, orgId) => {
+    axios
+      .post(url + "/organizations", {
+        userId,
+        orgId,
+      })
+      .then((res) => {
+        alert(JSON.stringify(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getOrganizationMembers = () => {
+    axios
+      .get(url + "/organizations")
+      .then((res) => {
+        alert(JSON.stringify(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const getOrgMembersById = (orgId) => {
+    axios
+      .get(url + "/organizations/" + orgId)
+      .then((res) => {
+        alert(JSON.stringify(res.data));
       })
       .catch((err) => {
         console.log(err);
@@ -201,12 +244,18 @@ function App() {
             setBudgetId(event.target.value);
           }}
         ></input>
-        <button onClick={sendOrg}>Send Organizations to DB</button>
+        <button
+          onClick={() => {
+            sendOrg(organization);
+          }}
+        >
+          Send Organizations to DB
+        </button>
         <button onClick={getOrganizations}>Get Organizations from DB</button>
         <button onClick={clearOrgs}>Clear Organizations in DB</button>
         <button
           onClick={() => {
-            getOrgByOrgId(orgId);
+            getOrgById(orgId);
           }}
         >
           Get organizations by id

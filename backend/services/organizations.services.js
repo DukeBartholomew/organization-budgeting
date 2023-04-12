@@ -23,7 +23,6 @@ async function getAllOrganizations() {
     SELECT * 
     FROM organizations`;
   const [rows] = await connection.query(query);
-  console.log(rows);
   return rows;
 }
 
@@ -39,7 +38,6 @@ async function getOrgById(orgId) {
 async function deleteAllOrganizations() {
   const query = `DELETE FROM organizations`;
   const results = await connection.query(query);
-  console.log(results[0].affectedRows);
   return results[0].affectedRows;
 }
 

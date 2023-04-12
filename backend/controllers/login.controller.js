@@ -12,6 +12,8 @@ async function loginHandler(req, res) {
       return res.status(401).json(match);
     }
     const token = createToken(username, userId);
+    console.log(`Created token:
+    ${token}`);
     res
       .cookie("jwtToken", token, {
         maxAge: 30 * 24 * 60 * 60 * 1000, //in milliseconds
@@ -24,7 +26,7 @@ async function loginHandler(req, res) {
       });
   } catch (error) {
     console.log(error);
-    res.status(400).json("Unable to Login User");
+    res.status(400).json({ error: error });
   }
 }
 
