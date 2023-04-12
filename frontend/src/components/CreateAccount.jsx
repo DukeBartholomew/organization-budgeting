@@ -121,7 +121,7 @@ export const Login = () => {
         />
         <br />
         <br />
-        <button
+        {/* <button
           type="button"
           className="login-button"
           onClick={() => {
@@ -131,7 +131,7 @@ export const Login = () => {
           }}
         >
           Login
-        </button>
+        </button> */}
         <br />
         <button
           type="button"
@@ -150,17 +150,17 @@ export const Login = () => {
           Register
         </button>
         <br />
-        <button
+        {/* <button
           type="button"
           className="login-button"
           onClick={handleProfileRequest}
         >
           Go to profile page
-        </button>
+        </button> */}
         <br />
-        <button type="button" className="login-button" onClick={handleLogout}>
+        {/* <button type="button" className="login-button" onClick={handleLogout}>
           Logout
-        </button>
+        </button> */}
       </div>
       <div className="clear"></div>
       {message && <p>{message}</p>}

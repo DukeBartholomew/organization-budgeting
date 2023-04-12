@@ -133,7 +133,7 @@ export const Login = () => {
           Login
         </button>
         <br />
-        <button
+        {/* <button
           type="button"
           className="login-button"
           onClick={() => {
@@ -148,7 +148,7 @@ export const Login = () => {
           }}
         >
           Register
-        </button>
+        </button> */}
         <br />
         <button
           type="button"
