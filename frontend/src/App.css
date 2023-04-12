@@ -31,6 +31,10 @@ body {
   background-image: url("./images/landingPage.png");
 }
 
+/* .home-body {
+  background-color: white;
+} */
+
 .login-info {
   border-width: 5px;
   display: inline-block;
@@ -45,4 +49,7 @@ body {
 
 .clear {
   float: none;
+}
+#cardFormat{
+  Width: 400px; 
 }
