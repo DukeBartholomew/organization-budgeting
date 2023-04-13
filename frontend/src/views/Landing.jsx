@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import axios from "axios";
 import { useState } from "react";
 import { Login } from "../components/Login";
+import { CreateAccount } from "../components/CreateAccount";
 
 
 
@@ -171,9 +172,10 @@ const Landing = () => {
     <body className="landing-body">
       <section className="landing"></section>
       <Navbar />
+      <h1>Login</h1>
       <Login/>
 
-      <button onClick={sendUser}>Send User to DB</button>
+      {/* <button onClick={sendUser}>Send User to DB</button>
       <button onClick={getUsers}>Get Users from DB</button>
       <button onClick={clearUsers}>Clear Users in DB</button>
       <button
@@ -221,7 +223,7 @@ const Landing = () => {
           setOrgId(event.target.value);
         }}
       ></input>
-      <br />
+      <br /> */}
     </body>
   </>;
 };

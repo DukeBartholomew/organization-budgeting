@@ -91,7 +91,7 @@ export const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <h2>First Name</h2>
+        {/* <h2>First Name</h2>
         <input
           type="text"
           className="firstName"
@@ -119,15 +119,14 @@ export const Login = () => {
           value={admin}
           onChange={(e) => setAdmin(e.target.value)}
         />
-        <br />
+        <br /> */}
         <br />
         <button
           type="button"
           className="login-button"
           onClick={() => {
-            navigate('/home');
             handleLogin(username, password);
-            
+            navigate('/home');
           }}
         >
           Login
@@ -136,20 +135,10 @@ export const Login = () => {
         <button
           type="button"
           className="login-button"
-          onClick={() => {
-            handleRegistration({
-              username,
-              password,
-              firstName,
-              lastName,
-              age,
-              admin,
-            });
-          }}
-        >
+          onClick={() => navigate('/register')}>
           Register
         </button>
-        <br />
+        {/* <br />
         <button
           type="button"
           className="login-button"
@@ -160,7 +149,7 @@ export const Login = () => {
         <br />
         <button type="button" className="login-button" onClick={handleLogout}>
           Logout
-        </button>
+        </button> */}
       </div>
       <div className="clear"></div>
       {message && <p>{message}</p>}

@@ -30,7 +30,7 @@ const handleLogin = (username, password) => {
 };
 
 const handleRegistration = (user) => {
-  axios.post(url + "/register", user).then((res) => {
+  axios.post(url + '/register', user).then((res) => {
       alert(JSON.stringify(res.data));
     })
     .catch((err) => {
@@ -59,6 +59,14 @@ const handleLogout = () => {
   alert("Logged Out");
 };
 
+const convertAdmin = (aval) => {
+  if(aval == 'True'){
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
 export const CreateAccount = () => {
 
   const navigate = useNavigate();
@@ -68,10 +76,8 @@ export const CreateAccount = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState("");
-  const [admin, setAdmin] = useState("");
+  const admin = true;
   const [message, setMessage] = useState("");
-
-  
 
   return (
     <>
@@ -112,13 +118,13 @@ export const CreateAccount = () => {
           value={age}
           onChange={(e) => setAge(e.target.value)}
         />
-        <h2>Admin</h2>
+        {/* <h2>Admin</h2>
         <input
           type="text"
           className="admin"
           value={admin}
           onChange={(e) => setAdmin(e.target.value)}
-        />
+        /> */}
         <br />
         <br />
         {/* <button
@@ -136,7 +142,7 @@ export const CreateAccount = () => {
         <button
           type="button"
           className="login-button"
-          onClick={() => {
+          onClick={ () => {
             handleRegistration({
               username,
               password,
@@ -145,9 +151,10 @@ export const CreateAccount = () => {
               age,
               admin,
             });
+            navigate('/home');
           }}
         >
-          Register
+          Create Account
         </button>
         <br />
         {/* <button
