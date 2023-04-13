@@ -1,14 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { Card, Image, Text, SimpleGrid, Container, Table } from '@mantine/core';
+import { DisplayOrgs } from '../components/DisplayOrgs';
+import axios from 'axios';
+import { ButtonCreateOrg } from '../components/ButtonCreateOrg';
+
 
 
 const Home = () => {
 
+    const url = "http://localhost:8000";
+
+    const getOrganizations = () => {
+        let allOrgs = [];
+        axios
+          .get(url + "/orgs")
+          .then((res) => {
+            // alert(JSON.stringify(res.data));
+            allOrgs = res.data;
+            
+            setOrgs(allOrgs);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+          console.log(allOrgs.length)
+      };
+
+
+    const [orgs, setOrgs] = useState('');
+
+    useEffect(() => {
+        getOrganizations();
+    }, []);
+
   return <>
     <Navbar />
-
-    <body>
+    <section>
       <Container bg="white">
         <Table horizontalSpacing="xl" verticalSpacing="xs" fontSize="md" striped highlightOnHover withBorder withColumnBorders>
           <thead>
@@ -19,13 +48,16 @@ const Home = () => {
             </tr>
           </thead>
           <tbody>
-            insert route to link all the orgs <br/>
+            {/* insert route to link all the orgs <br/> */}
           </tbody>
         </Table>
       </Container>
-    </body>
-    This page should connect to the coresponding link (Everything Under this)
-    <body>
+    </section>
+    <DisplayOrgs orgs={orgs}/>
+    <ButtonCreateOrg/>
+    
+    
+    {/* <body>
       <Container py="xl">
         <SimpleGrid cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
           <Card
@@ -126,7 +158,7 @@ const Home = () => {
 
         </SimpleGrid>
       </Container>
-    </body>
+    </body> */}
 
   </>
 }

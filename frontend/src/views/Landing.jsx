@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Login } from "../components/Login";
 import { CreateAccount } from "../components/CreateAccount";
+import { WebsiteInfo } from "../components/WebsiteInfo";
 
 
 
@@ -169,11 +170,14 @@ const Landing = () => {
   const [budgetId, setBudgetId] = useState(0);
   const [orgId, setOrgId] = useState(0);
   return <>
-    <body className="landing-body">
+    <div className="landing-body">
       <section className="landing"></section>
-      <Navbar />
-      <h1>Login</h1>
+      <Navbar/>
+      <WebsiteInfo/>
       <Login/>
+      
+
+
 
       {/* <button onClick={sendUser}>Send User to DB</button>
       <button onClick={getUsers}>Get Users from DB</button>
@@ -224,7 +228,7 @@ const Landing = () => {
         }}
       ></input>
       <br /> */}
-    </body>
+    </div>
   </>;
 };
 

@@ -13,7 +13,6 @@ const user = {
   admin: true,
 };
 
-
 const url = "http://localhost:8000";
 
 const handleLogin = (username, password) => {
@@ -61,7 +60,6 @@ const handleLogout = () => {
 };
 
 export const Login = () => {
-
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -71,8 +69,6 @@ export const Login = () => {
   const [age, setAge] = useState("");
   const [admin, setAdmin] = useState("");
   const [message, setMessage] = useState("");
-
-  
 
   return (
     <>
@@ -126,7 +122,7 @@ export const Login = () => {
           className="login-button"
           onClick={() => {
             handleLogin(username, password);
-            navigate('/home');
+            navigate("/home");
           }}
         >
           Login
@@ -135,9 +131,11 @@ export const Login = () => {
         <button
           type="button"
           className="login-button"
-          onClick={() => navigate('/register')}>
+          onClick={() => navigate("/register")}
+        >
           Register
         </button>
+        <section className="clear"></section>
         {/* <br />
         <button
           type="button"
