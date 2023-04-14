@@ -1,22 +1,13 @@
 import React from 'react'
 import Navbar from './Navbar'
-import { OrgTextInput } from '../components/OrgTextInput'
 import { NavbarMinimal } from '../components/NavbarMinimal'
 
-
-
-
-
-const CreateOrg = () => {
-
-    
-
+const Settings = () => {
   return <>
     <NavbarMinimal/>
     <Navbar/>
-    <OrgTextInput/>
-    
-  </>
+    <div>We ain't got no damn settings</div>
+    </>
 }
 
-export default CreateOrg
+export default Settings
