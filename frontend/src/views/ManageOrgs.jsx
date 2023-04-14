@@ -1,22 +1,13 @@
 import React from 'react'
 import Navbar from './Navbar'
-import { OrgTextInput } from '../components/OrgTextInput'
 import { NavbarMinimal } from '../components/NavbarMinimal'
 
-
-
-
-
-const CreateOrg = () => {
-
-    
-
+const ManageOrgs = () => {
   return <>
     <NavbarMinimal/>
     <Navbar/>
-    <OrgTextInput/>
-    
-  </>
+    <div>Edit and Delete Orgs and Budget Page</div>
+    </>
 }
 
-export default CreateOrg
+export default ManageOrgs

@@ -4,6 +4,7 @@ import { Card, Image, Text, SimpleGrid, Container, Table } from '@mantine/core';
 import { DisplayOrgs } from '../components/DisplayOrgs';
 import axios from 'axios';
 import { ButtonCreateOrg } from '../components/ButtonCreateOrg';
+import { NavbarMinimal } from '../components/NavbarMinimal';
 
 
 
@@ -36,8 +37,9 @@ const Home = () => {
     }, []);
 
   return <>
+    <NavbarMinimal />
     <Navbar />
-    <section>
+    <section style={{float: 'right', width: '80%', marginRight: '50px'}}>
       <Container bg="white">
         <Table horizontalSpacing="xl" verticalSpacing="xs" fontSize="md" striped highlightOnHover withBorder withColumnBorders>
           <thead>
@@ -52,9 +54,9 @@ const Home = () => {
           </tbody>
         </Table>
       </Container>
-    </section>
     <DisplayOrgs orgs={orgs}/>
     <ButtonCreateOrg/>
+    </section>
     
     
     {/* <body>
