@@ -3,10 +3,10 @@ CREATE DATABASE IF NOT EXISTS DBUI;
 USE DBUI;
 CREATE TABLE IF NOT EXISTS users(
     userId INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    firstName VARCHAR(255) NOT NULL,
-    lastName VARCHAR(255) NOT NULL,
+    username VARCHAR(128) UNIQUE NOT NULL,
+    password VARCHAR(128) NOT NULL,
+    firstName VARCHAR(128) NOT NULL,
+    lastName VARCHAR(128) NOT NULL,
     age INT,
     admin BOOLEAN NOT NULL DEFAULT FALSE,
     dateJoined DATETIME DEFAULT NOW()
@@ -19,8 +19,8 @@ CREATE TABLE IF NOT EXISTS organizations (
 );
 
 CREATE TABLE IF NOT EXISTS budgets (
-    budgetId INT AUTO_INCREMENT PRIMARY KEY,
-    orgId INT NOT NULL,
+    orgId INT PRIMARY KEY,
+    budgetAmount VARCHAR(128),
     dateCreated DATETIME DEFAULT NOW(),
     FOREIGN KEY (orgId) REFERENCES organizations(orgId)
 );

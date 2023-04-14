@@ -25,6 +25,7 @@ function App() {
 
   const budget = {
     orgId: 1,
+    budgetAmount: "$25,000.00",
   };
 
   const organizationMembers = {
@@ -100,9 +101,9 @@ function App() {
       });
   };
 
-  const getBudgetsById = (budgetId) => {
+  const getBudgetsById = (orgId) => {
     axios
-      .get(url + "/budgets/" + budgetId)
+      .get(url + "/budgets/" + orgId)
       .then((res) => {
         alert(JSON.stringify(res.data));
       })
