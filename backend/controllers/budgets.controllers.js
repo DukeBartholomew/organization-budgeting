@@ -29,7 +29,7 @@ async function getAllBudgetHandler(req, res) {
 
 async function getBudgetByBudgetIdHandler(req, res) {
   try {
-    const budget = await getBudgetById(req.params.budgetId);
+    const budget = await getBudgetById(req.params.orgId);
     console.log(budget);
     res.status(200).json(budget);
   } catch (error) {

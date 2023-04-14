@@ -2,19 +2,19 @@ import { connection } from "../mysql/connect.js";
 
 async function createBudget(budget) {
   try {
-    const { orgId } = budget;
+    const { orgId, budgetAmount } = budget;
     const query = `
     INSERT INTO budgets 
-    (orgId) 
-    VALUES (?)`;
+    (orgId, budgetAmount) 
+    VALUES (?, ?)`;
     console.log("results");
 
-    const results = await connection.query(query, [orgId]);
+    const results = await connection.query(query, [orgId, budgetAmount]);
     console.log(results);
 
     return {
-      budgetId: results[0].insertId,
       orgId,
+      budgetAmount,
       dateCreated: results[0].dateCreated,
     };
   } catch (error) {
@@ -31,12 +31,12 @@ async function getAllBudgets() {
   return rows;
 }
 
-async function getBudgetById(budgetId) {
+async function getBudgetById(orgId) {
   const query = `
       SELECT * 
       FROM budgets
-      WHERE budgetId = ?`;
-  const [rows] = await connection.query(query, [budgetId]);
+      WHERE orgId = ?`;
+  const [rows] = await connection.query(query, [orgId]);
   return rows[0];
 }
 

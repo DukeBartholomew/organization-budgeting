@@ -30,9 +30,8 @@ const Landing = () => {
   };
 
   const budget = {
-    budgetId: 1,
-    org: { orgId: organization.orgId },
-    dateCreated: "2023-04-06",
+    orgId: 1,
+    budgetAmount: "$25,000.00",
   };
 
   const sendUser = () => {
