@@ -22,26 +22,28 @@ export function OrgTextInput() {
 
     const requestDataOne = {
       orgName: orgName,
+      creator: 1, //creator needs to be set to userId
     };
-    const requestDataTwo ={
-      orgId: 6,
+    const requestDataTwo = {
+      orgId: 1,
       budgetAmount: budget,
-    }
+    };
 
     axios
-      .post(url + "/orgs", requestDataOne)
+      .post(url + "/organizations", requestDataOne)
       .then((response) => {
         console.log(response);
       })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    axios
-      .post(url + "/budgets", requestDataTwo)
-      .then((response) => {
-        navigate("/home");
-        alert(JSON.stringify(response.data));
+      .then(() => {
+        axios
+          .post(url + "/budgets", requestDataTwo)
+          .then((response) => {
+            navigate("/home");
+            alert(JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);

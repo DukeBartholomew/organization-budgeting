@@ -15,7 +15,9 @@ CREATE TABLE IF NOT EXISTS users(
 CREATE TABLE IF NOT EXISTS organizations (
     orgId INT AUTO_INCREMENT PRIMARY KEY,
     orgName VARCHAR (128) UNIQUE NOT NULL,
-    dateCreated DATETIME DEFAULT NOW()
+    creator INT NOT NULL,
+    dateCreated DATETIME DEFAULT NOW(),
+    FOREIGN KEY (creator) REFERENCES users(userId)
 );
 
 CREATE TABLE IF NOT EXISTS budgets (

@@ -34,7 +34,6 @@ async function getAllUsers() {
   SELECT * 
   FROM users`;
   const [rows] = await connection.query(query);
-  console.log(rows);
   return rows;
 }
 
@@ -53,14 +52,12 @@ async function getUserById(id) {
     FROM users 
     WHERE userId = ?`;
   const [rows] = await connection.query(query, [id]);
-  console.log(rows);
   return rows[0];
 }
 
 async function deleteAllUsers() {
   const query = `DELETE FROM users`;
   const results = await connection.query(query);
-  console.log(results[0].affectedRows);
   return results[0].affectedRows;
 }
 

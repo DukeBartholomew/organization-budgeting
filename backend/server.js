@@ -2,12 +2,12 @@ import express from "express";
 import cors from "cors";
 
 //imports the routers
-import userRouter from "./routes/users.routes.js";
+import usersRouter from "./routes/users.routes.js";
 import registerRouter from "./routes/register.routes.js";
 import loginRouter from "./routes/login.routes.js";
 import profileRouter from "./routes/profile.routes.js";
-import budgetRouter from "./routes/budgets.route.js";
-import orgsRouter from "./routes/organizations.route.js";
+import budgetsRouter from "./routes/budgets.routes.js";
+import organizationsRouter from "./routes/organizations.routes.js";
 //imports the middlewares
 import { validateToken } from "./middleware/token.validation.js";
 
@@ -20,12 +20,12 @@ app.use(cors()); // This has to be before any routes
 // Enable JSON parsing
 app.use(express.json());
 
-app.use("/users", userRouter);
+app.use("/users", usersRouter);
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use("/profile", validateToken, profileRouter);
-app.use("/budgets", budgetRouter);
-app.use("/orgs", orgsRouter);
+app.use("/budgets", budgetsRouter);
+app.use("/organizations", organizationsRouter);
 //error function
 app.use(function (err, req, res, next) {
   res.status(err.status || 500);

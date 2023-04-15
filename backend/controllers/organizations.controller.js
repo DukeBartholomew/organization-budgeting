@@ -2,14 +2,15 @@ import {
   createOrganization,
   getAllOrganizations,
   getOrgById,
+  getOrganizationByName,
   deleteAllOrganizations,
 } from "../services/organizations.services.js";
 
 async function createOrganizationHandler(req, res) {
   try {
-    const newOrg = await createOrganization(req.body);
-    console.log(newOrg);
-    res.status(201).json(newOrg);
+    const newOrganization = await createOrganization(req.body);
+    console.log(newOrganization);
+    res.status(201).json(newOrganization);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: error });
@@ -18,22 +19,33 @@ async function createOrganizationHandler(req, res) {
 
 async function getAllOrganizationsHandler(req, res) {
   try {
-    const orgs = await getAllOrganizations();
-    console.log(orgs);
-    res.status(200).json(orgs);
+    const organization = await getAllOrganizations();
+    console.log(organization);
+    res.status(200).json(organization);
   } catch (error) {
     console.error(error);
     res.status(400).json({ error: error });
   }
 }
 
-async function getOrgByIdHandler(req, res) {
+async function getOrganizationByIdHandler(req, res) {
   try {
-    const org = await getOrgById(req.params.orgId);
-    console.log(org);
-    res.status(200).json(org);
+    const organization = await getOrgById(req.params.orgId);
+    console.log(organization);
+    res.status(200).json(organization);
   } catch (error) {
     console.error(error);
+    res.status(400).json({ error: error });
+  }
+}
+
+async function getOrganizationByNameHandler(req, res) {
+  try {
+    const organization = await getOrganizationByName(req.params.orgName);
+    console.log(organization);
+    res.status(200).json(organization);
+  } catch (error) {
+    console.log(error);
     res.status(400).json({ error: error });
   }
 }
@@ -52,6 +64,7 @@ async function deleteAllOrganizationsHandler(req, res) {
 export {
   createOrganizationHandler,
   getAllOrganizationsHandler,
-  getOrgByIdHandler,
+  getOrganizationByIdHandler,
+  getOrganizationByNameHandler,
   deleteAllOrganizationsHandler,
 };

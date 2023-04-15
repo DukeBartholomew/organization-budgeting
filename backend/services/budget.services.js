@@ -7,11 +7,7 @@ async function createBudget(budget) {
     INSERT INTO budgets 
     (orgId, budgetAmount) 
     VALUES (?, ?)`;
-    console.log("results");
-
     const results = await connection.query(query, [orgId, budgetAmount]);
-    console.log(results);
-
     return {
       orgId,
       budgetAmount,
@@ -27,7 +23,6 @@ async function getAllBudgets() {
     SELECT * 
     FROM budgets`;
   const [rows] = await connection.query(query);
-  console.log(rows);
   return rows;
 }
 
@@ -43,7 +38,6 @@ async function getBudgetById(orgId) {
 async function deleteAllBudgets() {
   const query = `DELETE FROM budgets`;
   const results = await connection.query(query);
-  console.log(results[0].affectedRows);
   return results[0].affectedRows;
 }
 
