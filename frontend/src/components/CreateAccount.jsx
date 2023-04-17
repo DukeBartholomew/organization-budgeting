@@ -3,6 +3,8 @@ import axios from "axios";
 import { getJwt, setJWT, removeJWT } from "./utils/jwt";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../views/Navbar";
+import "./CreateAccount.css";
+
 
 const user = {
   id: 1,
@@ -81,95 +83,62 @@ export const CreateAccount = () => {
 
   return (
     <>
-      <Navbar/>
-      <div className="login-info">
-        <h2>Username</h2>
-        <input
-          type="text"
-          className="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <h2>Password</h2>
-        <input
-          type="text"
-          className="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <h2>First Name</h2>
-        <input
-          type="text"
-          className="firstName"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <h2>Last Name</h2>
-        <input
-          type="text"
-          className="lastName"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-        <h2>Age</h2>
-        <input
-          type="text"
-          className="age"
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
-        />
-        {/* <h2>Admin</h2>
-        <input
-          type="text"
-          className="admin"
-          value={admin}
-          onChange={(e) => setAdmin(e.target.value)}
-        /> */}
-        <br />
-        <br />
-        {/* <button
-          type="button"
-          className="login-button"
-          onClick={() => {
-            navigate('/home');
-            handleLogin(username, password);
-            
-          }}
-        >
-          Login
-        </button> */}
-        <br />
-        <button
-          type="button"
-          className="login-button"
-          onClick={ () => {
-            handleRegistration({
-              username,
-              password,
-              firstName,
-              lastName,
-              age,
-              admin,
-            });
-            navigate('/home');
-          }}
-        >
-          Create Account
-        </button>
-        <br />
-        {/* <button
-          type="button"
-          className="login-button"
-          onClick={handleProfileRequest}
-        >
-          Go to profile page
-        </button> */}
-        <br />
-        {/* <button type="button" className="login-button" onClick={handleLogout}>
-          Logout
-        </button> */}
+      <Navbar />
+      <div className="create-account-container">
+        <form className="create-account-form">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            className="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            className="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <label htmlFor="firstName">First Name</label>
+          <input
+            type="text"
+            className="firstName"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            type="text"
+            className="lastName"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <label htmlFor="age">Age</label>
+          <input
+            type="number"
+            className="age"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
+          />
+          <button
+            type="button"
+            onClick={() => {
+              handleRegistration({
+                username,
+                password,
+                firstName,
+                lastName,
+                age,
+                admin,
+              });
+              navigate('/home');
+            }}
+          >
+            Create Account
+          </button>
+        </form>
       </div>
-      <div className="clear"></div>
       {message && <p>{message}</p>}
     </>
   );

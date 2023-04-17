@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { getJwt, setJWT, removeJWT } from "./utils/jwt";
 import { useNavigate } from "react-router-dom";
+import "./LoginPage.css";
 
 const user = {
   id: 1,
@@ -72,85 +73,40 @@ export const Login = () => {
 
   return (
     <>
-      <div className="login-info">
-        <h2>Username</h2>
-        <input
-          type="text"
-          className="username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <h2>Password</h2>
-        <input
-          type="text"
-          className="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {/* <h2>First Name</h2>
-        <input
-          type="text"
-          className="firstName"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <h2>Last Name</h2>
-        <input
-          type="text"
-          className="lastName"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-        />
-        <h2>Age</h2>
-        <input
-          type="text"
-          className="age"
-          value={age}
-          onChange={(e) => setAge(e.target.value)}
-        />
-        <h2>Admin</h2>
-        <input
-          type="text"
-          className="admin"
-          value={admin}
-          onChange={(e) => setAdmin(e.target.value)}
-        />
-        <br /> */}
-        <br />
-        <button
-          type="button"
-          className="login-button"
-          onClick={() => {
-            handleLogin(username, password);
-            navigate("/home");
-          }}
-        >
-          Login
-        </button>
-        <br />
-        <button
-          type="button"
-          className="login-button"
-          onClick={() => navigate("/register")}
-        >
-          Register
-        </button>
-        <section className="clear"></section>
-        {/* <br />
-        <button
-          type="button"
-          className="login-button"
-          onClick={handleProfileRequest}
-        >
-          Go to profile page
-        </button>
-        <br />
-        <button type="button" className="login-button" onClick={handleLogout}>
-          Logout
-        </button> */}
+      <div className="login-container">
+        <form className="login-form">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            type="button"
+            onClick={() => {
+              handleLogin(username, password);
+              navigate("/home");
+            }}
+          >
+            Login
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate("/register")}
+          >
+            Register
+          </button>
+        </form>
       </div>
-      <div className="clear"></div>
       {message && <p>{message}</p>}
     </>
-  );
+  );  
 };
