@@ -26,16 +26,16 @@ const useStyles = createStyles((theme) => ({
     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.colors.gray[7],
 
     '&:hover': {
-      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[0],
+      backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.blue[0],
     },
   },
 
-  active: {
-    '&, &:hover': {
-      backgroundColor: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).background,
-      color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
-    },
-  },
+  // active: {
+  //   '&, &:hover': {
+  //     backgroundColor: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).background,
+  //     color: theme.fn.variant({ variant: 'light', color: theme.primaryColor }).color,
+  //   },
+  // },
 }));
 
 // interface NavbarLinkProps {
