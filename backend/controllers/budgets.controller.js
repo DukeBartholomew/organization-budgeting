@@ -2,6 +2,7 @@ import {
   createBudget,
   getAllBudgets,
   getBudgetById,
+  getBudgetByName,
   deleteAllBudgets,
 } from "../services/budget.services.js";
 
@@ -29,7 +30,18 @@ async function getAllBudgetsHandler(req, res) {
 
 async function getBudgetByIdHandler(req, res) {
   try {
-    const budget = await getBudgetById(req.params.orgId);
+    const budget = await getBudgetById(req.params.budgetId);
+    console.log(budget);
+    res.status(200).json(budget);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ error: error });
+  }
+}
+
+async function getBudgetByNameHandler(req, res) {
+  try {
+    const budget = await getBudgetByName(req.params.orgName);
     console.log(budget);
     res.status(200).json(budget);
   } catch (error) {
@@ -53,5 +65,6 @@ export {
   createBudgetHandler,
   getAllBudgetsHandler,
   getBudgetByIdHandler,
+  getBudgetByNameHandler,
   deleteAllBudgetsHandler,
 };
