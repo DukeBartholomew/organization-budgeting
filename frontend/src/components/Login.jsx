@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { getJwt, setJWT, removeJWT } from "./utils/jwt";
 import { useNavigate } from "react-router-dom";
@@ -14,17 +14,20 @@ const user = {
   admin: true,
 };
 
+//var loggedIn = false;
+
 const url = "http://localhost:8000";
 
-const handleLogin = (username, password) => {
+const handleLogin = (username, password, setLoggedin) => {
   axios
     .post(url + "/logIn", { username, password })
     .then((res) => {
       setJWT(res.data.token);
-      alert(res.data.username);
+      // alert(JSON.stringify(res.data));
+      setLoggedin(true);
     })
     .catch((err) => {
-      console.log(err.res.data);
+      console.log(err);
     });
 };
 
@@ -70,6 +73,12 @@ export const Login = () => {
   const [age, setAge] = useState("");
   const [admin, setAdmin] = useState("");
   const [message, setMessage] = useState("");
+  const [loggedIn, setLoggedin] = useState(false);
+  useEffect(() => {
+    if (loggedIn === true) {
+      navigate("/home");
+    }
+  }, [loggedIn, setLoggedin]);
 
   return (
     <>
@@ -92,21 +101,19 @@ export const Login = () => {
           <button
             type="button"
             onClick={() => {
-              handleLogin(username, password);
-              navigate("/home");
+              handleLogin(username, password, setLoggedin);
+
+              setPassword("");
             }}
           >
             Login
           </button>
-          <button
-            type="button"
-            onClick={() => navigate("/register")}
-          >
+          <button type="button" onClick={() => navigate("/register")}>
             Register
           </button>
         </form>
       </div>
       {message && <p>{message}</p>}
     </>
-  );  
+  );
 };

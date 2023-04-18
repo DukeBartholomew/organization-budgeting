@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { getJwt } from "./utils/jwt";
 
 export function OrgTextInput() {
   const url = "http://localhost:8000";
@@ -34,7 +35,6 @@ export function OrgTextInput() {
       .then((response) => {
         console.log(response);
         alert(JSON.stringify(response.data));
-
       })
       .then(() => {
         axios

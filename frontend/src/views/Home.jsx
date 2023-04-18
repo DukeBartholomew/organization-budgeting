@@ -44,8 +44,7 @@ const Home = () => {
         <Table horizontalSpacing="xl" verticalSpacing="xs" fontSize="md" striped highlightOnHover withBorder withColumnBorders>
           <thead>
             <tr>
-              <th>Organization</th>
-              <th>Name</th>
+              <th>Organization Name</th>
               <th>Budget</th>
             </tr>
           </thead>
