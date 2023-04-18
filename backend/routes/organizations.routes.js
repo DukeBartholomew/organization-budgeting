@@ -7,6 +7,7 @@ import {
   getOrganizationByNameHandler,
   deleteAllOrganizationsHandler,
 } from "../controllers/organizations.controller.js";
+import { validateToken } from "../middleware/token.validation.js";
 
 const organizationsRouter = Router();
 
