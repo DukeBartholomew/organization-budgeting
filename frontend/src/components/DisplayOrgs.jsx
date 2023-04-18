@@ -19,7 +19,7 @@ export const DisplayOrgs = (props) => {
         );
       });
     } else {
-      return <h3>No Organazations Yet</h3>;
+      return <h3>No Organizations Yet</h3>;
     }
   };
 
