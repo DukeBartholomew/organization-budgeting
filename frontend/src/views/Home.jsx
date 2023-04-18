@@ -15,7 +15,7 @@ const Home = () => {
     const getOrganizations = () => {
         let allOrgs = [];
         axios
-          .get(url + "/orgs")
+          .get(url + "/organizations")
           .then((res) => {
             // alert(JSON.stringify(res.data));
             allOrgs = res.data;

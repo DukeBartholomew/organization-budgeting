@@ -1,9 +1,10 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 export const DisplayOrgs = (props) => {
   const display = (props) => {
     const { orgs } = props;
-
+    console.log(orgs);
     if (orgs.length > 0) {
       return orgs.map((org, index) => {
         console.log(org);
@@ -11,6 +12,7 @@ export const DisplayOrgs = (props) => {
           <div className="org" key={org.orgId}>
             <span>
               <h3 className="org-title">{org.orgName}</h3>
+              <DisplayBudget org={org} />
               <p className="date-created">{org.dateCreated}</p>
             </span>
             <span className="spacing"></span>
@@ -24,4 +26,30 @@ export const DisplayOrgs = (props) => {
   };
 
   return <>{display(props)};</>;
+};
+
+const DisplayBudget = ({ org }) => {
+  const [budget, setBudget] = useState("");
+
+  getBudget(org.orgName, setBudget);
+
+  return (
+    <>
+      <h3 className="budget-title">{budget}</h3>
+    </>
+  );
+};
+
+const getBudget = (orgName, setBudget) => {
+  const url = "http://localhost:8000";
+
+  axios
+    .get(url + "/budgets/name/" + orgName)
+    .then((res) => {
+      setBudget(res.data.budgetAmount);
+      console.log(res.budgetAmount);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };

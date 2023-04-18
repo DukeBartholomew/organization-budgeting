@@ -20,7 +20,6 @@ const Landing = () => {
   };
 
   const organization = {
-    orgId: 1,
     orgName: "notGoogle",
     creator: 1,
     dateCreated: "2008-11-11",

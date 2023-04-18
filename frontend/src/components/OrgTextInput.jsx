@@ -25,7 +25,7 @@ export function OrgTextInput() {
       creator: 1, //creator needs to be set to userId
     };
     const requestDataTwo = {
-      orgId: 1,
+      orgName: orgName,
       budgetAmount: budget,
     };
 
@@ -33,6 +33,8 @@ export function OrgTextInput() {
       .post(url + "/organizations", requestDataOne)
       .then((response) => {
         console.log(response);
+        alert(JSON.stringify(response.data));
+
       })
       .then(() => {
         axios

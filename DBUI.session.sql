@@ -21,10 +21,11 @@ CREATE TABLE IF NOT EXISTS organizations (
 );
 
 CREATE TABLE IF NOT EXISTS budgets (
-    orgId INT PRIMARY KEY,
+    budgetId INT AUTO_INCREMENT PRIMARY KEY,
+    orgName VARCHAR (128) UNIQUE NOT NULL,
     budgetAmount VARCHAR(128),
     dateCreated DATETIME DEFAULT NOW(),
-    FOREIGN KEY (orgId) REFERENCES organizations(orgId)
+    FOREIGN KEY (orgName) REFERENCES organizations(orgName)
 );
 
 CREATE TABLE IF NOT EXISTS organizationMembers (
@@ -48,3 +49,7 @@ CREATE TABLE IF NOT EXISTS contributions (
     FOREIGN KEY (orgId) REFERENCES organizations(orgId),
     FOREIGN KEY (userId, orgId) REFERENCES organizationMembers(userId, orgId)
 );
+
+INSERT INTO users 
+(username, password, firstName, lastName, age)
+VALUES("UncleRico", "password", "Uncle", "Rico", 45);
