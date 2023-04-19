@@ -15,7 +15,11 @@ export function OrgTextInput() {
   };
 
   const handleBudgetChange = (event) => {
-    setBudget(event.target.value);
+    if(event.target.value.charAt(0) != '$'){
+      setBudget('$' + event.target.value);
+    }else{
+      setBudget(event.target.value);
+    }
   };
 
   const handleSubmit = (event) => {
@@ -27,7 +31,7 @@ export function OrgTextInput() {
     };
     const requestDataTwo = {
       orgName: orgName,
-      budgetAmount: budget,
+      budgetAmount: budget.charAt(0) === '$' ? budget : '$' + budget,
     };
 
     axios
