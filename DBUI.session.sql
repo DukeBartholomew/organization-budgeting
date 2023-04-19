@@ -3,10 +3,10 @@ CREATE DATABASE IF NOT EXISTS DBUI;
 USE DBUI;
 CREATE TABLE IF NOT EXISTS users(
     userId INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(255) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    firstName VARCHAR(255) NOT NULL,
-    lastName VARCHAR(255) NOT NULL,
+    username VARCHAR(128) UNIQUE NOT NULL,
+    password VARCHAR(128) NOT NULL,
+    firstName VARCHAR(128) NOT NULL,
+    lastName VARCHAR(128) NOT NULL,
     age INT,
     admin BOOLEAN NOT NULL DEFAULT FALSE,
     dateJoined DATETIME DEFAULT NOW()
@@ -15,19 +15,22 @@ CREATE TABLE IF NOT EXISTS users(
 CREATE TABLE IF NOT EXISTS organizations (
     orgId INT AUTO_INCREMENT PRIMARY KEY,
     orgName VARCHAR (128) UNIQUE NOT NULL,
-    dateCreated DATETIME DEFAULT NOW()
+    creator INT NOT NULL,
+    dateCreated DATETIME DEFAULT NOW(),
+    FOREIGN KEY (creator) REFERENCES users(userId)
 );
 
 CREATE TABLE IF NOT EXISTS budgets (
     budgetId INT AUTO_INCREMENT PRIMARY KEY,
-    orgId INT NOT NULL,
+    orgName VARCHAR (128) UNIQUE NOT NULL,
+    budgetAmount VARCHAR(128),
     dateCreated DATETIME DEFAULT NOW(),
-    FOREIGN KEY (orgId) REFERENCES organizations(orgId)
+    FOREIGN KEY (orgName) REFERENCES organizations(orgName)
 );
 
 CREATE TABLE IF NOT EXISTS organizationMembers (
-    userId INT,
-    orgId INT,
+    userId INT NOT NULL,
+    orgId INT NOT NULL,
     role VARCHAR(128),
     dateJoined DATETIME DEFAULT NOW(),
     favorited BOOLEAN DEFAULT FALSE,
@@ -46,3 +49,7 @@ CREATE TABLE IF NOT EXISTS contributions (
     FOREIGN KEY (orgId) REFERENCES organizations(orgId),
     FOREIGN KEY (userId, orgId) REFERENCES organizationMembers(userId, orgId)
 );
+
+INSERT INTO users 
+(username, password, firstName, lastName, age)
+VALUES("UncleRico", "password", "Uncle", "Rico", 45);

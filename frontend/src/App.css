@@ -35,6 +35,22 @@ body {
   background-color: white;
 } */
 
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.clear {
+  float: none;
+}
+
+.org {
+  background-color: white;
+}
+
 .login-info {
   border-width: 5px;
   display: inline-block;

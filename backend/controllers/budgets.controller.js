@@ -2,6 +2,7 @@ import {
   createBudget,
   getAllBudgets,
   getBudgetById,
+  getBudgetByName,
   deleteAllBudgets,
 } from "../services/budget.services.js";
 
@@ -16,7 +17,7 @@ async function createBudgetHandler(req, res) {
   }
 }
 
-async function getAllBudgetHandler(req, res) {
+async function getAllBudgetsHandler(req, res) {
   try {
     const budgets = await getAllBudgets();
     console.log(budgets);
@@ -27,7 +28,7 @@ async function getAllBudgetHandler(req, res) {
   }
 }
 
-async function getBudgetByBudgetIdHandler(req, res) {
+async function getBudgetByIdHandler(req, res) {
   try {
     const budget = await getBudgetById(req.params.budgetId);
     console.log(budget);
@@ -38,7 +39,18 @@ async function getBudgetByBudgetIdHandler(req, res) {
   }
 }
 
-async function deleteAllBudgetHandler(req, res) {
+async function getBudgetByNameHandler(req, res) {
+  try {
+    const budget = await getBudgetByName(req.params.orgName);
+    console.log(budget);
+    res.status(200).json(budget);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ error: error });
+  }
+}
+
+async function deleteAllBudgetsHandler(req, res) {
   try {
     const rowsDeleted = await deleteAllBudgets();
     console.log(rowsDeleted);
@@ -51,7 +63,8 @@ async function deleteAllBudgetHandler(req, res) {
 
 export {
   createBudgetHandler,
-  getAllBudgetHandler,
-  getBudgetByBudgetIdHandler,
-  deleteAllBudgetHandler,
+  getAllBudgetsHandler,
+  getBudgetByIdHandler,
+  getBudgetByNameHandler,
+  deleteAllBudgetsHandler,
 };

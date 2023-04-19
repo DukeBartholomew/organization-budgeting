@@ -2,19 +2,16 @@ import { connection } from "../mysql/connect.js";
 
 async function createBudget(budget) {
   try {
-    const { orgId } = budget;
+    const { orgName, budgetAmount } = budget;
     const query = `
     INSERT INTO budgets 
-    (orgId) 
-    VALUES (?)`;
-    console.log("results");
-
-    const results = await connection.query(query, [orgId]);
-    console.log(results);
-
+    (orgName, budgetAmount) 
+    VALUES (?, ?)`;
+    const results = await connection.query(query, [orgName, budgetAmount]);
     return {
-      budgetId: results[0].insertId,
-      orgId,
+      orgName,
+      budgetId: results[0].budgetId,
+      budgetAmount,
       dateCreated: results[0].dateCreated,
     };
   } catch (error) {
@@ -27,7 +24,6 @@ async function getAllBudgets() {
     SELECT * 
     FROM budgets`;
   const [rows] = await connection.query(query);
-  console.log(rows);
   return rows;
 }
 
@@ -40,11 +36,25 @@ async function getBudgetById(budgetId) {
   return rows[0];
 }
 
+async function getBudgetByName(orgName) {
+  const query = `
+      SELECT * 
+      FROM budgets
+      WHERE orgName = ?`;
+  const [rows] = await connection.query(query, [orgName]);
+  return rows[0];
+}
+
 async function deleteAllBudgets() {
   const query = `DELETE FROM budgets`;
   const results = await connection.query(query);
-  console.log(results[0].affectedRows);
   return results[0].affectedRows;
 }
 
-export { createBudget, getAllBudgets, getBudgetById, deleteAllBudgets };
+export {
+  createBudget,
+  getAllBudgets,
+  getBudgetById,
+  getBudgetByName,
+  deleteAllBudgets,
+};

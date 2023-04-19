@@ -1,31 +1,69 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { Card, Image, Text, SimpleGrid, Container, Table } from '@mantine/core';
+import { DisplayOrgs } from '../components/DisplayOrgs';
+import axios from 'axios';
+import { ButtonCreateOrg } from '../components/ButtonCreateOrg';
+import { NavbarMinimal } from '../components/NavbarMinimal';
+
 
 
 const Home = () => {
 
-  return <>
-    <Navbar />
+    const url = "http://localhost:8000";
 
-    <body>
+    const getOrganizations = () => {
+        let allOrgs = [];
+        axios
+          .get(url + "/organizations")
+          .then((res) => {
+            // alert(JSON.stringify(res.data));
+            allOrgs = res.data;
+            
+            setOrgs(allOrgs);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+
+          console.log(allOrgs.length)
+      };
+
+
+    const [orgs, setOrgs] = useState('');
+
+    const th = (
+      <tr>
+              <th>Organization Name</th>
+              <th>Budget</th>
+      </tr>
+    )
+
+    useEffect(() => {
+        getOrganizations();
+    }, []);
+
+  return <>
+    <NavbarMinimal />
+    <Navbar />
+    <section style={{float: 'right', width: '80%', marginRight: '50px'}}>
       <Container bg="white">
         <Table horizontalSpacing="xl" verticalSpacing="xs" fontSize="md" striped highlightOnHover withBorder withColumnBorders>
           <thead>
-            <tr>
-              <th>Organization</th>
-              <th>Name</th>
-              <th>Budget</th>
-            </tr>
+            {th}
           </thead>
           <tbody>
-            insert route to link all the orgs <br/>
+            {/* <DisplayOrgs orgs={orgs}/> */}
           </tbody>
         </Table>
       </Container>
-    </body>
-    This page should connect to the coresponding link (Everything Under this)
-    <body>
+      <DisplayOrgs orgs={orgs}/>
+      <ButtonCreateOrg/>
+    </section>
+    
+
+    
+    {/* <body>
       <Container py="xl">
         <SimpleGrid cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
           <Card
@@ -126,7 +164,7 @@ const Home = () => {
 
         </SimpleGrid>
       </Container>
-    </body>
+    </body> */}
 
   </>
 }

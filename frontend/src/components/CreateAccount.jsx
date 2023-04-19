@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { getJwt, setJWT, removeJWT } from "./utils/jwt";
 import { useNavigate } from "react-router-dom";
-import "./LoginPage.css";
+import Navbar from "../views/Navbar";
+import "./CreateAccount.css";
+
 
 const user = {
   id: 1,
@@ -14,27 +16,23 @@ const user = {
   admin: true,
 };
 
-//var loggedIn = false;
 
 const url = "http://localhost:8000";
 
-const handleLogin = (username, password, setLoggedin) => {
+const handleLogin = (username, password) => {
   axios
     .post(url + "/logIn", { username, password })
     .then((res) => {
       setJWT(res.data.token);
-      // alert(JSON.stringify(res.data));
-      setLoggedin(true);
+      alert(res.data.username);
     })
     .catch((err) => {
-      console.log(err);
+      console.log(err.res.data);
     });
 };
 
 const handleRegistration = (user) => {
-  axios
-    .post(url + "/register", user)
-    .then((res) => {
+  axios.post(url + '/register', user).then((res) => {
       alert(JSON.stringify(res.data));
     })
     .catch((err) => {
@@ -63,7 +61,16 @@ const handleLogout = () => {
   alert("Logged Out");
 };
 
-export const Login = () => {
+const convertAdmin = (aval) => {
+  if(aval == 'True'){
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+export const CreateAccount = () => {
+
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -71,45 +78,64 @@ export const Login = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [age, setAge] = useState("");
-  const [admin, setAdmin] = useState("");
+  const admin = true;
   const [message, setMessage] = useState("");
-  const [loggedIn, setLoggedin] = useState(false);
-  useEffect(() => {
-    if (loggedIn === true) {
-      navigate("/home");
-    }
-  }, [loggedIn, setLoggedin]);
 
   return (
     <>
-      <div className="login-container">
-        <form className="login-form">
+      <Navbar />
+      <div className="create-account-container">
+        <form className="create-account-form">
           <label htmlFor="username">Username</label>
           <input
             type="text"
-            id="username"
+            className="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
           <label htmlFor="password">Password</label>
           <input
             type="password"
-            id="password"
+            className="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+          />
+          <label htmlFor="firstName">First Name</label>
+          <input
+            type="text"
+            className="firstName"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+          <label htmlFor="lastName">Last Name</label>
+          <input
+            type="text"
+            className="lastName"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+          <label htmlFor="age">Age</label>
+          <input
+            type="number"
+            className="age"
+            value={age}
+            onChange={(e) => setAge(e.target.value)}
           />
           <button
             type="button"
             onClick={() => {
-              handleLogin(username, password, setLoggedin);
-
-              setPassword("");
+              handleRegistration({
+                username,
+                password,
+                firstName,
+                lastName,
+                age,
+                admin,
+              });
+              navigate('/home');
             }}
           >
-            Login
-          </button>
-          <button type="button" onClick={() => navigate("/register")}>
-            Register
+            Create Account
           </button>
         </form>
       </div>

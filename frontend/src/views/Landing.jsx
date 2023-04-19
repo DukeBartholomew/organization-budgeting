@@ -3,10 +3,8 @@ import Navbar from "./Navbar";
 import axios from "axios";
 import { useState } from "react";
 import { Login } from "../components/Login";
-
-
-
-
+import { CreateAccount } from "../components/CreateAccount";
+import { WebsiteInfo } from "../components/WebsiteInfo";
 
 const Landing = () => {
   const url = "http://localhost:8000";
@@ -22,15 +20,14 @@ const Landing = () => {
   };
 
   const organization = {
-    orgId: 1,
     orgName: "notGoogle",
+    creator: 1,
     dateCreated: "2008-11-11",
   };
 
   const budget = {
-    budgetId: 1,
-    org: { orgId: organization.orgId },
-    dateCreated: "2023-04-06",
+    orgId: 1,
+    budgetAmount: "$25,000.00",
   };
 
   const sendUser = () => {
@@ -167,13 +164,15 @@ const Landing = () => {
   const [userId, setUserId] = useState(0);
   const [budgetId, setBudgetId] = useState(0);
   const [orgId, setOrgId] = useState(0);
-  return <>
-    <body className="landing-body">
-      <section className="landing"></section>
-      <Navbar />
-      <Login/>
+  return (
+    <>
+      <div className="landing-body">
+        <section className="landing"></section>
+        <Navbar />
+        <WebsiteInfo />
+        <Login />
 
-      <button onClick={sendUser}>Send User to DB</button>
+        {/* <button onClick={sendUser}>Send User to DB</button>
       <button onClick={getUsers}>Get Users from DB</button>
       <button onClick={clearUsers}>Clear Users in DB</button>
       <button
@@ -221,9 +220,10 @@ const Landing = () => {
           setOrgId(event.target.value);
         }}
       ></input>
-      <br />
-    </body>
-  </>;
+      <br /> */}
+      </div>
+    </>
+  );
 };
 
 export default Landing;
