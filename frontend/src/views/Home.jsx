@@ -49,11 +49,10 @@ const Home = () => {
             </tr>
           </thead>
           <tbody>
-            {/* insert route to link all the orgs <br/> */}
+            <DisplayOrgs orgs={orgs}/>
           </tbody>
         </Table>
       </Container>
-    <DisplayOrgs orgs={orgs}/>
     <ButtonCreateOrg/>
     </section>
     
