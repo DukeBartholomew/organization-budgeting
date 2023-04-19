@@ -15,11 +15,7 @@ export function OrgTextInput() {
   };
 
   const handleBudgetChange = (event) => {
-    if(event.target.value.charAt(0) != '$'){
-      setBudget('$' + event.target.value);
-    }else{
-      setBudget(event.target.value);
-    }
+    setBudget(event.target.value);
   };
 
   const handleSubmit = (event) => {
