@@ -5,12 +5,14 @@ export const DisplayOrgs = (props) => {
   const display = (props) => {
     const { orgs } = props;
     console.log(orgs);
+
     const rows = orgs.map((org) => (
       <tr key={org.budgetId}>
         <td>{org.orgName}</td>
         <td><DisplayBudget org={org}/></td>
       </tr>
     ));
+
     if (orgs.length > 0) {
       // return orgs.map((org, index) => {
       //   console.log(org);
@@ -41,11 +43,7 @@ const DisplayBudget = ({ org }) => {
 
   getBudget(org.orgName, setBudget);
 
-  return (
-    <>
-      <h3 className="budget-title">{budget}</h3>
-    </>
-  );
+  return budget;
 };
 
 const getBudget = (orgName, setBudget) => {

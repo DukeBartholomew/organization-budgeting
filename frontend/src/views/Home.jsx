@@ -32,6 +32,13 @@ const Home = () => {
 
     const [orgs, setOrgs] = useState('');
 
+    const th = (
+      <tr>
+              <th>Organization Name</th>
+              <th>Budget</th>
+      </tr>
+    )
+
     useEffect(() => {
         getOrganizations();
     }, []);
@@ -43,17 +50,14 @@ const Home = () => {
       <Container bg="white">
         <Table horizontalSpacing="xl" verticalSpacing="xs" fontSize="md" striped highlightOnHover withBorder withColumnBorders>
           <thead>
-            <tr>
-              <th>Organization Name</th>
-              <th>Budget</th>
-            </tr>
+            {th}
           </thead>
           <tbody>
             <DisplayOrgs orgs={orgs}/>
           </tbody>
         </Table>
       </Container>
-    <ButtonCreateOrg/>
+      <ButtonCreateOrg/>
     </section>
     
     
