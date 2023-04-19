@@ -53,13 +53,15 @@ const Home = () => {
             {th}
           </thead>
           <tbody>
-            <DisplayOrgs orgs={orgs}/>
+            {/* <DisplayOrgs orgs={orgs}/> */}
           </tbody>
         </Table>
       </Container>
+      <DisplayOrgs orgs={orgs}/>
       <ButtonCreateOrg/>
     </section>
     
+
     
     {/* <body>
       <Container py="xl">
