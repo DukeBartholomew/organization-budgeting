@@ -43,4 +43,12 @@
   .create-account-form button:hover {
     background-color: #0056b3;
   }
+
+  .create-org-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+  }
+  
   
