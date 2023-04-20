@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { getJwt } from "./utils/jwt";
+import "./CreateAccount.css";
 
 export function OrgTextInput() {
   const url = "http://localhost:8000";
@@ -54,6 +55,8 @@ export function OrgTextInput() {
 
   return (
     <form onSubmit={handleSubmit}>
+      <div className="create-org-container">
+        <div className="create-account-form">
       <label htmlFor="orgName">Organization Name:</label>
       <input
         type="text"
@@ -63,6 +66,7 @@ export function OrgTextInput() {
         value={orgName}
         onChange={handleOrgNameChange}
       />
+      <br></br>
       <label htmlFor="budgetAmount">What is your budget?</label>
       <input
         type="text"
@@ -75,6 +79,8 @@ export function OrgTextInput() {
       <br></br>
       {/* Add any other relevant input fields here */}
       <button type="submit">Create Organization</button>
+      </div>
+      </div>
     </form>
   );
 }
