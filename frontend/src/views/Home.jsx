@@ -57,9 +57,11 @@ const Home = () => {
           </tbody>
         </Table>
       </Container>
+      {/* <DisplayOrgs orgs={orgs}/> */}
       <ButtonCreateOrg/>
     </section>
     
+
     
     {/* <body>
       <Container py="xl">

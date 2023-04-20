@@ -6,6 +6,13 @@ export const DisplayOrgs = (props) => {
     const { orgs } = props;
     console.log(orgs);
 
+    const rows = orgs.map((org) => (
+      <tr key={org.budgetId}>
+        <td>{org.orgName}</td>
+        <td><DisplayBudget org={org}/></td>
+      </tr>
+    ));
+
     if (orgs.length > 0) {
       // return orgs.map((org, index) => {
       //   console.log(org);
@@ -22,12 +29,6 @@ export const DisplayOrgs = (props) => {
       //     // <tbody>{rows}</tbody>
       //   );
       // });
-      const rows = orgs.map((org) => (
-        <tr key={org.budgetId}>
-          <td>{org.orgName}</td>
-          <td><DisplayBudget org={org}/></td>
-        </tr>
-      ));
       return <><tbody>{rows}</tbody></>;
     } else {
       return <h3>No Organizations Yet</h3>;
