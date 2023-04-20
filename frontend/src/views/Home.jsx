@@ -52,12 +52,12 @@ const Home = () => {
           <thead>
             {th}
           </thead>
-          <tbody>
-            {/* <DisplayOrgs orgs={orgs}/> */}
-          </tbody>
+          <DisplayOrgs orgs={orgs}/>
         </Table>
       </Container>
-      <DisplayOrgs orgs={orgs}/>
+      {/* <DisplayOrgs orgs={orgs}/> */}
+      <br />
+      <br />
       <ButtonCreateOrg/>
     </section>
     
