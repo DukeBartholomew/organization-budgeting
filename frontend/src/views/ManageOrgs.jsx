@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Navbar from './Navbar';
-import { Container, Table } from '@mantine/core';
-import { NavbarMinimal } from '../components/NavbarMinimal';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Navbar from "./Navbar";
+import { Container, Table } from "@mantine/core";
+import { NavbarMinimal } from "../components/NavbarMinimal";
 
 const ManageOrgs = () => {
   const [orgs, setOrgs] = useState([]);
 
-  const url = 'http://localhost:8000';
+  const url = "http://localhost:8000";
 
   const getOrganizations = () => {
     axios
-      .get(url + '/organizations')
+      .get(url + "/organizations")
       .then((res) => {
         setOrgs(res.data);
       })
@@ -25,11 +25,11 @@ const ManageOrgs = () => {
   }, []);
 
   const handleDelete = (orgId) => {
-    if (window.confirm('Are you sure you want to delete this organization?')) {
+    if (window.confirm("Are you sure you want to delete this organization?")) {
       axios
-        .delete(url + '/organizations/' + orgId)
+        .delete(url + "/organizations/" + orgId)
         .then((res) => {
-          console.log('Organization deleted successfully');
+          console.log("Organization deleted successfully");
           getOrganizations();
         })
         .catch((err) => {
@@ -39,13 +39,22 @@ const ManageOrgs = () => {
   };
 
   const handleEdit = (orgId, orgName, budgetAmount) => {
-    const newOrgName = prompt('Please enter the new name for the organization:', orgName);
-    const newBudgetAmount = prompt('Please enter the new budget for the organization:', budgetAmount);
+    const newOrgName = prompt(
+      "Please enter the new name for the organization:",
+      orgName
+    );
+    const newBudgetAmount = prompt(
+      "Please enter the new budget for the organization:",
+      budgetAmount
+    );
     if (newOrgName && newBudgetAmount) {
       axios
-        .put(url + '/organizations/' + orgId, { orgName: newOrgName, budgetAmount: newBudgetAmount })
+        .put(url + "/organizations/" + orgId, {
+          orgName: newOrgName,
+          budgetAmount: newBudgetAmount,
+        })
         .then((res) => {
-          console.log('Organization updated successfully');
+          console.log("Organization updated successfully");
           getOrganizations();
         })
         .catch((err) => {
@@ -53,8 +62,6 @@ const ManageOrgs = () => {
         });
     }
   };
-
-  
 
   const th = (
     <tr>
@@ -66,15 +73,25 @@ const ManageOrgs = () => {
 
   const rows = orgs.map((org) => (
     <tr key={org.orgId}>
-      <td>{org.orgName}</td>
+      <td>
+        <h3>{org.orgName}</h3>Description: {org._description}
+        <br></br>Venmo: @{org.venmo}
+      </td>
+
       <td>
         <DisplayBudget orgName={org.orgName} />
       </td>
       <td>
-      <button className="btn btn-primary mr-2" onClick={() => handleEdit(org.orgId, org.orgName)}>
+        <button
+          className="btn btn-primary mr-2"
+          onClick={() => handleEdit(org.orgId, org.orgName)}
+        >
           Edit
         </button>
-        <button className="btn btn-danger" onClick={() => handleDelete(org.orgId)}>
+        <button
+          className="btn btn-danger"
+          onClick={() => handleDelete(org.orgId)}
+        >
           Delete
         </button>
       </td>
@@ -85,7 +102,7 @@ const ManageOrgs = () => {
     <>
       <NavbarMinimal />
       <Navbar />
-      <section style={{ float: 'right', width: '80%', marginRight: '50px' }}>
+      <section style={{ float: "right", width: "80%", marginRight: "50px" }}>
         <Container bg="white">
           <Table
             horizontalSpacing="xl"
@@ -108,13 +125,12 @@ const ManageOrgs = () => {
 };
 
 const DisplayBudget = ({ orgName }) => {
-
-  const url = 'http://localhost:8000';
-  const [budget, setBudget] = useState('');
+  const url = "http://localhost:8000";
+  const [budget, setBudget] = useState("");
 
   const getBudget = () => {
     axios
-      .get(url + '/budgets/name/' + orgName)
+      .get(url + "/budgets/name/" + orgName)
       .then((res) => {
         setBudget(res.data.budgetAmount);
       })

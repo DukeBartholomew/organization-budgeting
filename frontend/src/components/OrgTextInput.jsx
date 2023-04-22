@@ -9,12 +9,23 @@ export function OrgTextInput() {
   const navigate = useNavigate();
 
   const [orgName, setOrgName] = useState("");
+  const [_description, _setDescription] = useState("");
+  const [venmo, setVenmo] = useState("");
   const [budget, setBudget] = useState("");
+
 
   const handleOrgNameChange = (event) => {
     setOrgName(event.target.value);
   };
 
+  const handleOrgDescriptionChange = (event) => {
+    _setDescription(event.target.value);
+  };
+
+  const handleVenmoChange = (event) => {
+    setVenmo(event.target.value);
+  };
+  
   const handleBudgetChange = (event) => {
     setBudget(event.target.value);
   };
@@ -24,6 +35,8 @@ export function OrgTextInput() {
 
     const requestDataOne = {
       orgName: orgName,
+      _description: _description,
+      venmo: venmo,
       creator: 1, //creator needs to be set to userId
     };
     const requestDataTwo = {
@@ -66,8 +79,26 @@ export function OrgTextInput() {
         value={orgName}
         onChange={handleOrgNameChange}
       />
+      <label htmlFor="_description">Organization Description(Max 500 Characters):</label>
+      <input
+        type="text"
+        id="_description"
+        name="_description"
+        required
+        value={_description}
+        onChange={handleOrgDescriptionChange}
+      />
+      <label htmlFor="venmo">Venmo Name(don't include @ symbol):</label>
+      <input
+        type="text"
+        id="venmo"
+        name="venmo"
+        required
+        value={venmo}
+        onChange={handleVenmoChange}
+      />
       <br></br>
-      <label htmlFor="budgetAmount">What is your budget?</label>
+      <label htmlFor="budgetAmount">What is your budget?(include currency unit)</label>
       <input
         type="text"
         id="budgetAmount"
