@@ -2,16 +2,18 @@ import { query } from "express";
 import { connection } from "../mysql/connect.js";
 
 async function createOrganization(organization) {
-  const { orgName, creator } = organization;
+  const { orgName, _description, venmo, creator } = organization;
   const query = `
     INSERT INTO organizations 
-    (orgName, creator) 
-    VALUES (?, ?)`;
+    (orgName, _description, venmo, creator) 
+    VALUES (?, ?, ?, ?)`;
   try {
-    const results = await connection.query(query, [orgName, creator]);
+    const results = await connection.query(query, [orgName, _description, venmo, creator]);
     return {
       orgId: results[0].insertId,
       orgName,
+      _description,
+      venmo,
       dateCreated: results[0].dateCreated,
     };
   } catch (error) {

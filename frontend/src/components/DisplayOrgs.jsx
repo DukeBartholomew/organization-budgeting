@@ -9,13 +9,13 @@ export const DisplayOrgs = (props) => {
     if (orgs.length > 0) {
       const rows = orgs.map((org) => (
         <tr key={org.budgetId}>
-          <td>{org.orgName}</td>
+          <td><h3>{org.orgName}</h3>Description: {org._description}<br></br>Venmo: @{org.venmo}</td>
           <td><DisplayBudget org={org}/></td>
         </tr>
       ));
       return <><tbody>{rows}</tbody></>;
     } else {
-      return <h3>No Organizations Yet</h3>;
+      return <tbody>No Organizations Yet</tbody>;
     }
   };
 

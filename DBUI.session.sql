@@ -15,6 +15,8 @@ CREATE TABLE IF NOT EXISTS users(
 CREATE TABLE IF NOT EXISTS organizations (
     orgId INT AUTO_INCREMENT PRIMARY KEY,
     orgName VARCHAR (128) UNIQUE NOT NULL,
+    _description VARCHAR (500),
+    venmo VARCHAR (128),
     creator INT NOT NULL,
     dateCreated DATETIME DEFAULT NOW(),
     FOREIGN KEY (creator) REFERENCES users(userId)
