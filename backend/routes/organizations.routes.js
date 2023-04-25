@@ -6,6 +6,7 @@ import {
   getOrganizationByIdHandler,
   getOrganizationByNameHandler,
   deleteAllOrganizationsHandler,
+  deleteOrganizationHandler,
 } from "../controllers/organizations.controller.js";
 import { validateToken } from "../middleware/token.validation.js";
 
@@ -20,4 +21,5 @@ organizationsRouter.delete(
   deleteAllOrganizationsHandler
 );
 
+organizationsRouter.delete("/:orgName", deleteOrganizationHandler);
 export default organizationsRouter;

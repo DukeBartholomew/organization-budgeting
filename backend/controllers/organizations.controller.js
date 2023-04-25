@@ -4,6 +4,7 @@ import {
   getOrgById,
   getOrganizationByName,
   deleteAllOrganizations,
+  deleteOrganization,
 } from "../services/organizations.services.js";
 
 async function createOrganizationHandler(req, res) {
@@ -61,10 +62,21 @@ async function deleteAllOrganizationsHandler(req, res) {
   }
 }
 
+async function deleteOrganizationHandler(req, res) {
+  try {
+    const rowsDeleted = await deleteOrganization(req.params.orgName);
+    console.log(rowsDeleted);
+    res.status(200).json(rowsDeleted);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ error: error });
+  }
+}
 export {
   createOrganizationHandler,
   getAllOrganizationsHandler,
   getOrganizationByIdHandler,
   getOrganizationByNameHandler,
   deleteAllOrganizationsHandler,
+  deleteOrganizationHandler,
 };
