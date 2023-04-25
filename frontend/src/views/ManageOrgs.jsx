@@ -75,13 +75,13 @@ const ManageOrgs = () => {
     }
   };
 
-  const th = (
-    <tr>
-      <th>Organization Name</th>
-      <th>Budget</th>
-      <th>Action</th>
-    </tr>
-  );
+  // const th = (
+  //   <tr>
+  //     <th>Organization Name</th>
+  //     <th>Budget</th>
+  //     <th>Action</th>
+  //   </tr>
+  // );
 
   const rows = orgs.map((org) => (
     <tr key={org.orgId}>
@@ -125,7 +125,11 @@ const ManageOrgs = () => {
             withBorder
             withColumnBorders
           >
-            <thead>{th}</thead>
+            <thead>
+              <th>Organization Name</th>
+              <th>Budget</th>
+              <th>Action</th>
+            </thead>
             <tbody>{rows}</tbody>
           </Table>
         </Container>
