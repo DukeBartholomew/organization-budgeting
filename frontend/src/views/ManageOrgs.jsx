@@ -6,6 +6,7 @@ import { NavbarMinimal } from "../components/NavbarMinimal";
 
 const ManageOrgs = () => {
   const [orgs, setOrgs] = useState([]);
+  const [budget, setBudget] = useState("");
 
   const url = "http://localhost:8000";
 
@@ -24,38 +25,49 @@ const ManageOrgs = () => {
     getOrganizations();
   }, []);
 
-  const handleDelete = (orgId) => {
+  const handleDelete = (orgName) => {
     if (window.confirm("Are you sure you want to delete this organization?")) {
       axios
-        .delete(url + "/organizations/" + orgId)
+        .delete(url + "/budgets/" + orgName)
         .then((res) => {
-          console.log("Organization deleted successfully");
-          getOrganizations();
+
+          console.log(res);
+          // getOrganizations();
         })
+        .then(() => {
+          axios.delete(url + "/organizations/" + orgName)
+          .then((res) => {
+            console.log("Organization deleted successfully");
+            getOrganizations();
+            console.log(res);
+            window.location.reload ();
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+
+      })
         .catch((err) => {
           console.log(err);
         });
+      
     }
   };
 
-  const handleEdit = (orgId, orgName, budgetAmount) => {
-    const newOrgName = prompt(
-      "Please enter the new name for the organization:",
-      orgName
-    );
+  const handleEdit = (orgName, budgetAmount) => {
     const newBudgetAmount = prompt(
-      "Please enter the new budget for the organization:",
+      "Please enter the new budget for your organization:",
       budgetAmount
     );
-    if (newOrgName && newBudgetAmount) {
+    if (newBudgetAmount) {
       axios
-        .put(url + "/organizations/" + orgId, {
-          orgName: newOrgName,
+        .put(url + "/budgets/" + orgName, {
           budgetAmount: newBudgetAmount,
         })
         .then((res) => {
-          console.log("Organization updated successfully");
-          getOrganizations();
+          console.log("Budget Sucessfully Updated");
+          // alert(JSON.stringify(res));
+          window.location.reload ();
         })
         .catch((err) => {
           console.log(err);
@@ -84,13 +96,13 @@ const ManageOrgs = () => {
       <td>
         <button
           className="btn btn-primary mr-2"
-          onClick={() => handleEdit(org.orgId, org.orgName)}
+          onClick={() => handleEdit(org.orgName)}
         >
-          Edit
+          Edit Budget
         </button>
         <button
           className="btn btn-danger"
-          onClick={() => handleDelete(org.orgId)}
+          onClick={() => handleDelete(org.orgName)}
         >
           Delete
         </button>

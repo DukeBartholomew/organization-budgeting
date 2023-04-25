@@ -51,10 +51,30 @@ async function deleteAllBudgets() {
   return results[0].affectedRows;
 }
 
+async function editBudget(budgetAmount, orgName) {
+  const query = `
+  UPDATE budgets
+  SET budgetAmount = ?
+  WHERE orgName = ?`;
+  const results = await connection.query(query, [orgName, budgetAmount]);
+  return results[0].affectedRows; //return new budget created
+}
+
+async function deleteBudget(orgName) {
+  const query = `
+  DELETE FROM budgets
+  WHERE orgName = ?`;
+  const results = await connection.query(query, [orgName]);
+  return results[0].affectedRows;
+}
+//todo change the returning results to what was deleted
+
 export {
   createBudget,
   getAllBudgets,
   getBudgetById,
   getBudgetByName,
   deleteAllBudgets,
+  editBudget,
+  deleteBudget,
 };
