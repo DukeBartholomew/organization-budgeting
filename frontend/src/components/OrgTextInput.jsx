@@ -48,14 +48,14 @@ export function OrgTextInput() {
       .post(url + "/organizations", requestDataOne)
       .then((response) => {
         console.log(response);
-        alert(JSON.stringify(response.data));
+        // alert(JSON.stringify(response.data));
       })
       .then(() => {
         axios
           .post(url + "/budgets", requestDataTwo)
           .then((response) => {
             navigate("/home");
-            alert(JSON.stringify(response.data));
+            // alert(JSON.stringify(response.data));
           })
           .catch((error) => {
             console.log(error);

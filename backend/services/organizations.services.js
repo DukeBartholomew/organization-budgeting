@@ -52,6 +52,15 @@ async function getOrganizationByName(orgName) {
   return rows[0];
 }
 
+async function getOrganizationByCreator(creator) {
+  const query = `
+  SELECT *
+  FROM organizations
+  WHERE creator = ?`;
+  const [rows] = await connection.query(query, [creator]);
+  return rows;
+}
+
 async function deleteAllOrganizations() {
   const query = `DELETE FROM organizations`;
   const results = await connection.query(query);
@@ -73,4 +82,5 @@ export {
   getOrganizationByName,
   deleteOrganization,
   deleteAllOrganizations,
+  getOrganizationByCreator,
 };
