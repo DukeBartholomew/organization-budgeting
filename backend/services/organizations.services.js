@@ -2,16 +2,23 @@ import { query } from "express";
 import { connection } from "../mysql/connect.js";
 
 async function createOrganization(organization) {
-  const { orgName, creator } = organization;
+  const { orgName, _description, venmo, creator } = organization;
   const query = `
     INSERT INTO organizations 
-    (orgName, creator) 
-    VALUES (?, ?)`;
+    (orgName, _description, venmo, creator) 
+    VALUES (?, ?, ?, ?)`;
   try {
-    const results = await connection.query(query, [orgName, creator]);
+    const results = await connection.query(query, [
+      orgName,
+      _description,
+      venmo,
+      creator,
+    ]);
     return {
       orgId: results[0].insertId,
       orgName,
+      _description,
+      venmo,
       dateCreated: results[0].dateCreated,
     };
   } catch (error) {
@@ -45,9 +52,26 @@ async function getOrganizationByName(orgName) {
   return rows[0];
 }
 
+async function getOrganizationByCreator(creator) {
+  const query = `
+  SELECT *
+  FROM organizations
+  WHERE creator = ?`;
+  const [rows] = await connection.query(query, [creator]);
+  return rows;
+}
+
 async function deleteAllOrganizations() {
   const query = `DELETE FROM organizations`;
   const results = await connection.query(query);
+  return results[0].affectedRows;
+}
+
+async function deleteOrganization(orgName) {
+  const query = `
+  DELETE FROM organizations
+  WHERE orgName = ?`;
+  const results = await connection.query(query, [orgName]);
   return results[0].affectedRows;
 }
 
@@ -56,5 +80,7 @@ export {
   getAllOrganizations,
   getOrgById,
   getOrganizationByName,
+  deleteOrganization,
   deleteAllOrganizations,
+  getOrganizationByCreator,
 };

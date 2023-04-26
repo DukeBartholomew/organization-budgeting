@@ -44,7 +44,7 @@ export function ButtonCreateOrg() {
 
   return (
     <Button
-      fullWidth
+      w={500}
       className={classes.button}
       onClick={() => navigate("/create-org")}
       color={loaded ? "teal" : theme.primaryColor}

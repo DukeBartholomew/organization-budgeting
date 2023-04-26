@@ -4,6 +4,8 @@ import {
   getBudgetById,
   getBudgetByName,
   deleteAllBudgets,
+  deleteBudget,
+  editBudget,
 } from "../services/budget.services.js";
 
 async function createBudgetHandler(req, res) {
@@ -61,10 +63,35 @@ async function deleteAllBudgetsHandler(req, res) {
   }
 }
 
+async function deleteBudgetHandler(req, res) {
+  try {
+    const results = await deleteBudget(req.params.orgName);
+    console.log(results);
+    res.status(200).json(results);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ error: error });
+  }
+}
+async function editBudgetHandler(req, res) {
+  try {
+    const rowsUpdated = await editBudget(
+      req.params.orgName,
+      req.body.budgetAmount
+    );
+    console.log(rowsUpdated);
+    res.status(200).json(rowsUpdated);
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ error: error });
+  }
+}
 export {
   createBudgetHandler,
   getAllBudgetsHandler,
   getBudgetByIdHandler,
   getBudgetByNameHandler,
   deleteAllBudgetsHandler,
+  deleteBudgetHandler,
+  editBudgetHandler,
 };
