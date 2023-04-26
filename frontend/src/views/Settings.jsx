@@ -6,7 +6,7 @@ const Settings = () => {
   return <>
     <NavbarMinimal/>
     <Navbar/>
-    <div>We ain't got no damn settings</div>
+    <div>We ain't got no settings</div>
     </>
 }
 

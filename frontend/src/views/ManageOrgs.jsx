@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Navbar from "./Navbar";
-import { Container, Table } from "@mantine/core";
+import { Container, Table, keyframes } from "@mantine/core";
 import { NavbarMinimal } from "../components/NavbarMinimal";
 
 const ManageOrgs = () => {
   const [orgs, setOrgs] = useState([]);
   const [budget, setBudget] = useState("");
 
+
   const url = "http://localhost:8000";
 
-  const getOrganizations = () => {
+  const getOrganizationsByCreator = (creator) => {
     axios
-      .get(url + "/organizations")
+      .get(url + `/organizations/creator/${creator}`)
       .then((res) => {
         setOrgs(res.data);
       })
@@ -22,7 +23,7 @@ const ManageOrgs = () => {
   };
 
   useEffect(() => {
-    getOrganizations();
+    getOrganizationsByCreator();
   }, []);
 
   const handleDelete = (orgName) => {
@@ -38,7 +39,7 @@ const ManageOrgs = () => {
           axios.delete(url + "/organizations/" + orgName)
           .then((res) => {
             console.log("Organization deleted successfully");
-            getOrganizations();
+            getOrganizationsByCreator();
             console.log(res);
             window.location.reload ();
           })
@@ -75,6 +76,16 @@ const ManageOrgs = () => {
     }
   };
 
+  const th = (
+    
+    <tr>
+      <th>Organization Name</th>
+      <th>Budget</th>
+      <th>Action</th>
+    </tr>
+  );
+
+  
   // const th = (
   //   <tr>
   //     <th>Organization Name</th>
@@ -109,11 +120,14 @@ const ManageOrgs = () => {
       </td>
     </tr>
   ));
-
+  
+  
+getOrganizationsByCreator(1);
   return (
     <>
       <NavbarMinimal />
       <Navbar />
+      
       <section style={{ float: "right", width: "80%", marginRight: "50px" }}>
         <Container bg="white">
           <Table
@@ -136,8 +150,11 @@ const ManageOrgs = () => {
         <br />
         <br />
       </section>
+      {orgs.length === 0 ? <h1 style={{marginTop: "140px"}}>You Don't Have Any Organizations Yet!</h1>: <h1></h1>};
+
     </>
   );
+  
 };
 
 const DisplayBudget = ({ orgName }) => {
