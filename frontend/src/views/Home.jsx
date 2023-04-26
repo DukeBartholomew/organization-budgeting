@@ -32,12 +32,12 @@ const Home = () => {
 
     const [orgs, setOrgs] = useState('');
 
-    const th = (
-      <tr>
-              <th>Organization Name</th>
-              <th>Budget</th>
-      </tr>
-    )
+    // const th = (
+    //   <tr>
+    //           <th>Organization Name</th>
+    //           <th>Budget</th>
+    //   </tr>
+    // )
 
     useEffect(() => {
         getOrganizations();
@@ -50,7 +50,8 @@ const Home = () => {
       <Container bg="white">
         <Table horizontalSpacing="xl" verticalSpacing="xs" fontSize="md" striped highlightOnHover withBorder withColumnBorders>
           <thead>
-            {th}
+          <th>Organization Name</th>
+              <th>Budget</th>
           </thead>
           <DisplayOrgs orgs={orgs}/>
         </Table>

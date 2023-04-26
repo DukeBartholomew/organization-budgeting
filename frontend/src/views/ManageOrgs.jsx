@@ -86,6 +86,14 @@ const ManageOrgs = () => {
   );
 
   
+  // const th = (
+  //   <tr>
+  //     <th>Organization Name</th>
+  //     <th>Budget</th>
+  //     <th>Action</th>
+  //   </tr>
+  // );
+
   const rows = orgs.map((org) => (
     <tr key={org.orgId}>
       <td>
@@ -131,7 +139,11 @@ getOrganizationsByCreator(1);
             withBorder
             withColumnBorders
           >
-            <thead>{th}</thead>
+            <thead>
+              <th>Organization Name</th>
+              <th>Budget</th>
+              <th>Action</th>
+            </thead>
             <tbody>{rows}</tbody>
           </Table>
         </Container>
